@@ -352,8 +352,7 @@ namespace Bastion
         }
         void RegisterStates()
         {
-            bool hmm;
-            ContentAddition.AddEntityState<Primary>(out _);
+            ContentAddition.AddEntityState<PrimaryButEpic>(out _);
             ContentAddition.AddEntityState<Secondary>(out _);
             ContentAddition.AddEntityState<Utility>(out _);
             ContentAddition.AddEntityState<UtilityStart>(out _);
@@ -380,7 +379,7 @@ namespace Bastion
             LanguageAPI.Add(SURVIVORNAMEKEY + "_M1_DESCRIPTION", "Deliver a shocking punch for <style=cIsDamage>200% damage</style>.");
 
             var SkillDef = ScriptableObject.CreateInstance<SteppedSkillDef>();
-            SkillDef.activationState = new SerializableEntityStateType(typeof(Primary));
+            SkillDef.activationState = new SerializableEntityStateType(typeof(PrimaryButEpic));
             SkillDef.activationStateMachineName = "Weapon";
             SkillDef.baseMaxStock = 0;
             SkillDef.baseRechargeInterval = 0f;

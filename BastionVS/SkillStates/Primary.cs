@@ -66,7 +66,7 @@ namespace Bastion
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            base.characterBody.isSprinting = false;
+            base.characterBody.isSprinting = false;//what the fuck
             if (base.isAuthority)
             {
                 if (base.fixedAge >= swingDelay && base.fixedAge <= maxSwingTime)

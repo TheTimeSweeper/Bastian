@@ -24,7 +24,7 @@ namespace Bastion
         }
         public static void AddEmoteSupport()
         {
-            //EmotesAPI.CustomEmotesAPI.ImportArmature(MainPlugin.characterPrefab, Assets.MainAssetBundle.LoadAsset<GameObject>("BastianHumanoid"), true);
+            EmotesAPI.CustomEmotesAPI.ImportArmature(MainPlugin.characterPrefab, Assets.MainAssetBundle.LoadAsset<GameObject>("BastianHumanoid"), false);
         }
     }
 }
