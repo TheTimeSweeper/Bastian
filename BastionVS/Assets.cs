@@ -19,7 +19,7 @@ using System.Security.Permissions;
 using System.Linq;
 using R2API.ContentManagement;
 
-namespace Bastion
+namespace Bastian
 {
     class Assets
     {

@@ -54,6 +54,7 @@ public class ArrayTransferTool : MonoBehaviour {
 
 #if UNITY_EDITOR
         UnityEditor.Undo.RecordObject(childLocator, "grab transes");
+        UnityEditor.Undo.RecordObject(this, "grab transes");
 #endif
 
         int originalLength = childLocator.transformPairs.Length;

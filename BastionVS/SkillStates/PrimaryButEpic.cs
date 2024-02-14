@@ -1,17 +1,12 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace Bastion
+namespace Bastian
 {
     public class PrimaryButEpic : BaseMeleeAttack
-    {
-        private float baseSwingDelay = 0.12f;
-
-        private float baseMaxSwingTime = 0.25f;
-
-        private float baseEarlyExitTime = 0.38f;
-        
-        private float baseDamageCoefficient = 2.5f;
+    {        
+        private float baseDamageCoefficient => Configs.M1_Damage.Value;
+        private BlastDamageBuildupController blastor;
 
         public override void OnEnter()
         {
@@ -22,12 +17,12 @@ namespace Bastion
             procCoefficient = 1f;
             pushForce = 100f;
             bonusForce = Vector3.zero;
-            baseDuration = 0.5f;
+            baseDuration = Configs.M1_Duration.Value;
 
-            attackStartPercentTime = baseSwingDelay / baseDuration;// 0.2f;
-            attackEndPercentTime = baseMaxSwingTime / baseDuration;// 0.4f;
+            attackStartPercentTime = 0.12f;
+            attackEndPercentTime = 0.34f;
 
-            earlyExitPercentTime = baseEarlyExitTime / baseDuration;// 0.6f;
+            earlyExitPercentTime = 0.57f;
 
             hitStopDuration = 0.05f;
             attackRecoil = 0.5f;
@@ -39,12 +34,22 @@ namespace Bastion
             playbackRateParam = "M1";
             swingEffectPrefab = null;// Prefabs.swingEffect;
             hitEffectPrefab = Prefabs.swingImpact;
-
+            
             AkSoundEngine.PostEvent(Sounds.Play_Bastian_Swing, base.gameObject);
 
             //impactSound = HenryAssets.swordHitSoundEvent.index;
 
             base.OnEnter();
+
+            blastor = GetComponent<BlastDamageBuildupController>();
+
+            //R2API.DamageAPI.AddModdedDamageType(attack, Prefabs.buildupDamage);
+        }
+
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+            StartAimMode(2);
         }
 
         protected override void PlaySwingEffect()
@@ -59,17 +64,23 @@ namespace Bastion
             gameObject.GetComponent<ScaleParticleSystemDuration>().newDuration = 0.3f;
         }
 
+        protected override void OnHitEnemyAuthority()
+        {
+            base.OnHitEnemyAuthority();
+            if (blastor)
+            {
+                blastor.FillCharge(damageCoefficient);
+            }
+        }
+
         protected override void PlayAttackAnimation()
         {
             base.PlayAttackAnimation();
 
+            base.PlayAnimation("Gesture, Override", swingIndex == 0 ? "SwingL" : "SwingR", "M1", this.duration);
             if (base.isGrounded & !base.GetModelAnimator().GetBool("isMoving"))
             {
                 base.PlayAnimation("FullBody, Override", swingIndex == 0 ? "SwingL" : "SwingR", "M1", this.duration);
-            }
-            else
-            {
-                base.PlayAnimation("Gesture, Override", swingIndex == 0 ? "SwingL" : "SwingR", "M1", this.duration);
             }
         }
     }

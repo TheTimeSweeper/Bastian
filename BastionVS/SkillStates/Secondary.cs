@@ -20,18 +20,18 @@ using System.Linq;
 using R2API.ContentManagement;
 using UnityEngine.AddressableAssets;
 
-namespace Bastion
+namespace Bastian
 {
     class Secondary : BaseSkillState
     {
         private float duration;
-        private float baseDuration = 1f;
+        private float baseDuration = Configs.M2_Duration.Value;
         private float fireDelay;
         private float baseFireDelay = 0.00f;
-        private float interruptTime = 0.3f;
+        private float interruptPercentTime = 0.46f;
 
         private bool hasFired;
-        private float damageCoefficient = 2.0f;
+        private float damageCoefficient = Configs.M2_Damage.Value;
 
         public override void OnEnter()
         {
@@ -39,17 +39,13 @@ namespace Bastion
             base.StartAimMode();
             duration = baseDuration / base.attackSpeedStat;
             fireDelay = baseFireDelay / base.attackSpeedStat;
-            interruptTime *= duration;
+            interruptPercentTime *= duration;
 
             base.PlayAnimation("Gesture, Override", "Shoot", "M2", this.duration);
-            //if (base.isGrounded & !base.GetModelAnimator().GetBool("isMoving"))
-            //{
-            //    base.PlayAnimation("FullBody, Override", "Shoot", "M2", this.duration);
-            //}
-            //else
-            //{
-            //    base.PlayAnimation("Gesture, Override", "Shoot", "M2", this.duration);
-            //}
+            if (base.isGrounded & !base.GetModelAnimator().GetBool("isMoving"))
+            {
+                base.PlayAnimation("FullBody, Override", "Shoot", "M2", this.duration);
+            }
         }
         public override void FixedUpdate()
         {
@@ -101,7 +97,7 @@ namespace Bastion
         }
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            if (base.fixedAge > interruptTime)
+            if (base.fixedAge > interruptPercentTime)
             {
                 return InterruptPriority.Any;
             }

@@ -18,7 +18,7 @@ using System.Linq;
 using R2API.ContentManagement;
 using UnityEngine.AddressableAssets;
 
-namespace Bastion
+namespace Bastian
 {
     class Primary : BaseSkillState
     {

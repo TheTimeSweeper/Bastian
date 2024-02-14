@@ -20,7 +20,7 @@ using System.Linq;
 using R2API.ContentManagement;
 using UnityEngine.AddressableAssets;
 
-namespace Bastion
+namespace Bastian
 {
     class Prefabs
     {
@@ -32,17 +32,27 @@ namespace Bastion
         internal static GameObject dashEffect;
         internal static GameObject explosionEffect;
         internal static GameObject chargeSphere;
-        internal static BuffDef speed { get; set; }
+        internal static BuffDef speed;
+        internal static BuffDef damageCount;
+        //internal static DamageAPI.ModdedDamageType buildupDamage;
 
         internal static void CreatePrefabs()
         {
-			speed = ScriptableObject.CreateInstance<BuffDef>();
+            //buildupDamage = DamageAPI.ReserveDamageType();
+
+            speed = ScriptableObject.CreateInstance<BuffDef>();
 			speed.buffColor = MainPlugin.characterColor;
 			speed.canStack = false;
 			speed.iconSprite = Load<Sprite>("RoR2/Base/Common/texMovespeedBuffIcon.tif");
 			ContentAddition.AddBuffDef(speed);
 
-			muzzleflash = PrefabAPI.InstantiateClone(Load<GameObject>("RoR2/Base/Common/VFX/Muzzleflash1.prefab"), "Muzzleflash", false);
+            damageCount = ScriptableObject.CreateInstance<BuffDef>();
+            damageCount.buffColor = MainPlugin.characterColor;
+            damageCount.canStack = true;
+            damageCount.iconSprite = Load<Sprite>("RoR2/Base/Common/texMovespeedBuffIcon.tif");
+            ContentAddition.AddBuffDef(damageCount);
+
+            muzzleflash = PrefabAPI.InstantiateClone(Load<GameObject>("RoR2/Base/Common/VFX/Muzzleflash1.prefab"), "Muzzleflash", false);
 			foreach (ParticleSystemRenderer particleSystemRenderer in muzzleflash.GetComponentsInChildren<ParticleSystemRenderer>(true))
 			{
 				particleSystemRenderer.gameObject.SetActive(true);

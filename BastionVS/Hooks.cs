@@ -20,7 +20,7 @@ using System.Linq;
 using R2API.ContentManagement;
 using UnityEngine.AddressableAssets;
 
-namespace Bastion
+namespace Bastian
 {
     class Hook
     {
@@ -34,6 +34,7 @@ namespace Bastion
             {
                 args.moveSpeedMultAdd += 0.8f;
                 args.damageMultAdd -= 0.5f;
+                args.regenMultAdd += Configs.M4_Regen.Value;
             }
         }
     }

@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 using UnityEngine.Events;
 using UnityEngine.AddressableAssets;
 
-namespace Bastion
+namespace Bastian
 {
     class Utils
     {
@@ -31,6 +31,7 @@ namespace Bastion
             characterDisplay.GetComponentInChildren<MaskBehaviour>().model = null;
             UnityEngine.Object.Destroy(characterDisplay.GetComponentInChildren<AimAnimator>());
             characterDisplay.GetComponentInChildren<CharacterModel>().enabled = false;
+            characterDisplay.AddComponent<ClassicMenuSoundBehaviour>();
             foreach (SkinnedMeshRenderer r in characterDisplay.GetComponentsInChildren<SkinnedMeshRenderer>())
             {
                 r.material.shaderKeywords = null;

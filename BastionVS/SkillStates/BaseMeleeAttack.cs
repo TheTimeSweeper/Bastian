@@ -5,7 +5,7 @@ using RoR2.Skills;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Bastion
+namespace Bastian
 {
     public abstract class BaseMeleeAttack : BaseSkillState, SteppedSkillDef.IStepSetter
     {
@@ -40,7 +40,7 @@ namespace Bastion
         public float duration;
         private bool hasFired;
         private float hitPauseTimer;
-        private OverlapAttack attack;
+        protected OverlapAttack attack;
         protected bool inHitPause;
         private bool hasHopped;
         protected float stopwatch;

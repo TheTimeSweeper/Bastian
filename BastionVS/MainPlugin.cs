@@ -19,10 +19,11 @@ using System.Security.Permissions;
 using System.Linq;
 using R2API.ContentManagement;
 using UnityEngine.AddressableAssets;
+using Bastian.SkillDefs;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
-namespace Bastion
+namespace Bastian
 {
     [BepInDependency("com.weliveinasociety.CustomEmotesAPI", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency(R2API.ContentManagement.R2APIContentManager.PluginGUID)]
@@ -36,13 +37,11 @@ namespace Bastion
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class MainPlugin : BaseUnityPlugin
     {
-        public const string MODUID = "com.DragonyckKKing.Bastian";
+        public const string MODUID = "com.Silly.Bastian";
         public const string MODNAME = "Bastian";
         public const string VERSION = "1.0.0";
-        public const string SURVIVORNAME = "Bastian: Model 4.1.N.K";
+        public const string SURVIVORNAME = "Bastian";
         public const string SURVIVORNAMEKEY = "BASTIAN";
-
-        private const string configSection = "hello";
 
         public static GameObject characterPrefab;
         public static readonly Color characterColor = new Color(0.9176471f, 0.6862745f, 0.9137255f);
@@ -52,12 +51,15 @@ namespace Bastion
         private void Awake()
         {
             instance = this;
+            Configs.InitGeneral();
             Assets.PopulateAssets();
             Prefabs.CreatePrefabs();
             CreatePrefab();
             RegisterStates();
             RegisterCharacter();
             Hook.Hooks();
+
+            Configs.InitSkills();
 
             if (ModCompat.EmoteAPIEnabled)
             {
@@ -101,14 +103,14 @@ namespace Bastion
 
             CharacterBody bodyComponent = characterPrefab.GetComponent<CharacterBody>();
             bodyComponent.name = "BastianBody";
-            bodyComponent.baseNameToken = SURVIVORNAMEKEY + "_NAME";
+            bodyComponent.baseNameToken = Configs.Personality.Value ? SURVIVORNAMEKEY + "_NAME_EPIC" : SURVIVORNAMEKEY + "_NAME";
             bodyComponent.subtitleNameToken = SURVIVORNAMEKEY + "_SUBTITLE";
             bodyComponent.bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes;
             bodyComponent.rootMotionInMainState = false;
             bodyComponent.mainRootSpeed = 0;
             bodyComponent.baseMaxHealth = 110;
             bodyComponent.levelMaxHealth = 33;
-            bodyComponent.baseRegen = 1.5f;
+            bodyComponent.baseRegen = 2.5f;
             bodyComponent.levelRegen = 0.2f;
             bodyComponent.baseMaxShield = 0;
             bodyComponent.levelMaxShield = 0;
@@ -123,7 +125,7 @@ namespace Bastion
             bodyComponent.levelAttackSpeed = 0;
             bodyComponent.baseCrit = 1;
             bodyComponent.levelCrit = 0;
-            bodyComponent.baseArmor = 0;
+            bodyComponent.baseArmor = 20;
             bodyComponent.levelArmor = 0;
             bodyComponent.baseJumpCount = 1;
             bodyComponent.sprintingSpeedMultiplier = 1.45f;
@@ -137,7 +139,7 @@ namespace Bastion
             bodyComponent.skinIndex = 0U;
             bodyComponent.bodyColor = characterColor;
 
-            Modules.Config.ConfigureBody(bodyComponent, configSection);
+            Modules.Config.ConfigureBody(bodyComponent, Configs.SectionBody);
 
             HealthComponent healthComponent = characterPrefab.GetComponent<HealthComponent>();
             healthComponent.health = bodyComponent.maxHealth;
@@ -309,6 +311,8 @@ namespace Bastion
             var list = networkStateMachine.stateMachines.ToList();
             networkStateMachine.stateMachines = list.ToArray();
 
+            characterPrefab.AddComponent<BlastDamageBuildupController>();
+
             ContentAddition.AddBody(characterPrefab);
         }
         private void RegisterCharacter()
@@ -328,9 +332,10 @@ namespace Bastion
                 "He was brought aboard the UES Contact Light as part of a backup plan, in case any negotiations for the survival of the other crew members came into play. " +
                 "However, he ended up being reprogrammed for combat, despite this being a simple grab-and-go mission.";
 
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_NAME", SURVIVORNAME);
+            LanguageAPI.Add(SURVIVORNAMEKEY + "_NAME", "Translator");
+            LanguageAPI.Add(SURVIVORNAMEKEY + "_NAME_EPIC", "Bastian");
             LanguageAPI.Add(SURVIVORNAMEKEY + "_DESCRIPTION", desc);
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_SUBTITLE", "");
+            LanguageAPI.Add(SURVIVORNAMEKEY + "_SUBTITLE", "Model 4.I.N.K.");
             LanguageAPI.Add(SURVIVORNAMEKEY + "_OUTRO", outro);
             LanguageAPI.Add(SURVIVORNAMEKEY + "_FAIL", fail);
             LanguageAPI.Add(SURVIVORNAMEKEY + "_LORE", lore);
@@ -452,7 +457,7 @@ namespace Bastion
 
             ContentAddition.AddSkillDef(SkillDef);
 
-            Modules.Config.ConfigureSkillDef(SkillDef, configSection, "Secondary", true, true, true);
+            Modules.Config.ConfigureSkillDef(SkillDef, Configs.SectionBody, "Secondary", true, true, true);
 
             component.secondary = characterPrefab.AddComponent<GenericSkill>();
             SkillFamily newFamily = ScriptableObject.CreateInstance<SkillFamily>();
@@ -486,6 +491,7 @@ namespace Bastion
             SkillDef.isCombatSkill = false;
             SkillDef.mustKeyPress = true;
             SkillDef.cancelSprintingOnActivation = false;
+            SkillDef.forceSprintDuringState = true;
             SkillDef.rechargeStock = 1;
             SkillDef.requiredStock = 1;
             SkillDef.stockToConsume = 1;
@@ -496,7 +502,7 @@ namespace Bastion
 
             ContentAddition.AddSkillDef(SkillDef);
 
-            Modules.Config.ConfigureSkillDef(SkillDef, configSection, "Utility");
+            Modules.Config.ConfigureSkillDef(SkillDef, Configs.SectionBody, "Utility");
 
             component.utility = characterPrefab.AddComponent<GenericSkill>();
             SkillFamily newFamily = ScriptableObject.CreateInstance<SkillFamily>();
@@ -517,11 +523,11 @@ namespace Bastion
             LanguageAPI.Add(SURVIVORNAMEKEY + "_SPEC", "Architect Burst");
             LanguageAPI.Add(SURVIVORNAMEKEY + "_SPEC_DESCRIPTION", "<style=cIsUtility>EVASIVE</style>. Overload your body for a massive damage burst, at the cost of your movement speed and <style=cIsHealth>1/3 health</style>.");
 
-            var SkillDef = ScriptableObject.CreateInstance<SkillDef>();
+            var SkillDef = ScriptableObject.CreateInstance<HasBlastDamageBuildupSkillDef>();
             SkillDef.activationState = new SerializableEntityStateType(typeof(SpecialStart));
             SkillDef.activationStateMachineName = "Weapon";
             SkillDef.baseMaxStock = 1;
-            SkillDef.baseRechargeInterval = 20f;
+            SkillDef.baseRechargeInterval = 12f;
             SkillDef.beginSkillCooldownOnSkillEnd = true;
             SkillDef.canceledFromSprinting = false;
             SkillDef.fullRestockOnAssign = false;
@@ -539,7 +545,7 @@ namespace Bastion
 
             ContentAddition.AddSkillDef(SkillDef);
 
-            Modules.Config.ConfigureSkillDef(SkillDef, configSection, "Special");
+            Modules.Config.ConfigureSkillDef(SkillDef, Configs.SectionBody, "Special");
 
             component.special = characterPrefab.AddComponent<GenericSkill>();
             SkillFamily newFamily = ScriptableObject.CreateInstance<SkillFamily>();

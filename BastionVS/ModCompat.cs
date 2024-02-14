@@ -5,7 +5,7 @@ using UnityEngine;
 using RoR2;
 using RoR2.Skills;
 
-namespace Bastion
+namespace Bastian
 {
     public static class ModCompat
     {

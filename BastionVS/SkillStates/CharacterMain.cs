@@ -19,23 +19,13 @@ using System.Security.Permissions;
 using System.Linq;
 using R2API.ContentManagement;
 
-namespace Bastion
+namespace Bastian
 {
     class CharacterMain : GenericCharacterMain
     {
         public override void OnEnter()
         {
             base.OnEnter();
-        }
-
-        public override void Update()
-        {
-            base.Update();
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                Debug.LogWarning(GetModelAnimator().GetFloat("aimYawCycle"));
-                Debug.LogWarning(GetModelAnimator().GetFloat("aimPitchCycle"));
-            }
         }
     }
 }
