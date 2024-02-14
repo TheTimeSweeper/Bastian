@@ -133,8 +133,10 @@ namespace Bastion
         private void EnterAttack()
         {
             hasFired = true;
-            Util.PlayAttackSpeedSound(swingSoundString, gameObject, attackSpeedStat);
-
+            if (!string.IsNullOrEmpty(swingSoundString))
+            {
+                Util.PlayAttackSpeedSound(swingSoundString, gameObject, attackSpeedStat);
+            }
             PlaySwingEffect();
 
             if (isAuthority)

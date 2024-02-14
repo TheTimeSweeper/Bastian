@@ -41,11 +41,17 @@ namespace Bastion
         public const string VERSION = "1.0.0";
         public const string SURVIVORNAME = "Bastian: Model 4.1.N.K";
         public const string SURVIVORNAMEKEY = "BASTIAN";
+
+        private const string configSection = "hello";
+
         public static GameObject characterPrefab;
         public static readonly Color characterColor = new Color(0.9176471f, 0.6862745f, 0.9137255f);
 
+        public static MainPlugin instance;
+
         private void Awake()
         {
+            instance = this;
             Assets.PopulateAssets();
             Prefabs.CreatePrefabs();
             CreatePrefab();
@@ -131,6 +137,8 @@ namespace Bastion
             bodyComponent.skinIndex = 0U;
             bodyComponent.bodyColor = characterColor;
 
+            Modules.Config.ConfigureBody(bodyComponent, configSection);
+
             HealthComponent healthComponent = characterPrefab.GetComponent<HealthComponent>();
             healthComponent.health = bodyComponent.maxHealth;
             healthComponent.shield = 0f;
@@ -153,6 +161,7 @@ namespace Bastion
             ChildLocator childLocator = model.GetComponent<ChildLocator>();
 
             CharacterModel characterModel = model.AddComponent<CharacterModel>();
+
 
             SkinnedMeshRenderer[] renderers = model.GetComponentsInChildren<SkinnedMeshRenderer>();
             List<CharacterModel.RendererInfo> rendererInfoList = new List<CharacterModel.RendererInfo>();
@@ -214,14 +223,14 @@ namespace Bastion
             }
             hurtBoxGroup.hurtBoxes = hurtboxes.ToArray();
 
-            Utils.CreateHitbox("Swing", model.transform, new Vector3(13, 9, 12)).transform.localPosition = new Vector3(0, 2.203f, 4);
+            Utils.CreateHitbox("Swing", model.transform, new Vector3(13, 11, 12)).transform.localPosition = new Vector3(0, 2.64f, 4f);
 
             var ragdollMaterial = Addressables.LoadAssetAsync<PhysicMaterial>("RoR2/Base/Common/physmatRagdoll.physicMaterial").WaitForCompletion();
             List<Transform> transforms = new List<Transform>();
             List<string> boneNames = new List<string>()
             {
                 "BASE",
-                "spine.005",
+                "pelvis",
                 "stomach",
                 "spine",
                 "chest",
@@ -291,7 +300,7 @@ namespace Bastion
 
             EntityStateMachine mainStateMachine = bodyComponent.GetComponent<EntityStateMachine>();
             mainStateMachine.mainStateType = new SerializableEntityStateType(typeof(CharacterMain));
-
+            
             CharacterDeathBehavior characterDeathBehavior = characterPrefab.GetComponent<CharacterDeathBehavior>();
             characterDeathBehavior.deathStateMachine = characterPrefab.GetComponent<EntityStateMachine>();
             characterDeathBehavior.deathState = new SerializableEntityStateType(typeof(EntityStates.Commando.DeathState));
@@ -376,7 +385,7 @@ namespace Bastion
         {
             SkillLocator component = characterPrefab.GetComponent<SkillLocator>();
             LanguageAPI.Add(SURVIVORNAMEKEY + "_M1", "Shocking Swing");
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_M1_DESCRIPTION", "Deliver a shocking punch for <style=cIsDamage>200% damage</style>.");
+            LanguageAPI.Add(SURVIVORNAMEKEY + "_M1_DESCRIPTION", "Deliver a shocking punch for <style=cIsDamage>250% damage</style>.");
 
             var SkillDef = ScriptableObject.CreateInstance<SteppedSkillDef>();
             SkillDef.activationState = new SerializableEntityStateType(typeof(PrimaryButEpic));
@@ -414,25 +423,24 @@ namespace Bastion
                 viewableNode = new ViewablesCatalog.Node(SkillDef.skillNameToken, false, null)
             };
             ContentAddition.AddSkillFamily(skillFamily);
-
         }
         void SecondarySetup()
         {
             SkillLocator component = characterPrefab.GetComponent<SkillLocator>();
             LanguageAPI.Add(SURVIVORNAMEKEY + "_M2", "Micro-Bullet");
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_M2_DESCRIPTION", "Fire 5 rounds of energy charges, each dealing <style=cIsDamage>100% damage</style>.");
+            LanguageAPI.Add(SURVIVORNAMEKEY + "_M2_DESCRIPTION", "Fire 5 rounds of energy charges, each dealing <style=cIsDamage>200% damage</style>.");
 
             var SkillDef = ScriptableObject.CreateInstance<SkillDef>();
             SkillDef.activationState = new SerializableEntityStateType(typeof(Secondary));
             SkillDef.activationStateMachineName = "Weapon";
             SkillDef.baseMaxStock = 5;
-            SkillDef.baseRechargeInterval = 2f;
+            SkillDef.baseRechargeInterval = 8f;
             SkillDef.beginSkillCooldownOnSkillEnd = true;
             SkillDef.canceledFromSprinting = false;
             SkillDef.fullRestockOnAssign = true;
-            SkillDef.interruptPriority = InterruptPriority.PrioritySkill;
+            SkillDef.interruptPriority = InterruptPriority.Skill;
             SkillDef.isCombatSkill = true;
-            SkillDef.mustKeyPress = true;
+            SkillDef.mustKeyPress = false;
             SkillDef.cancelSprintingOnActivation = true;
             SkillDef.rechargeStock = 5;
             SkillDef.requiredStock = 1;
@@ -443,6 +451,8 @@ namespace Bastion
             SkillDef.skillNameToken = SURVIVORNAMEKEY + "_M2";
 
             ContentAddition.AddSkillDef(SkillDef);
+
+            Modules.Config.ConfigureSkillDef(SkillDef, configSection, "Secondary", true, true, true);
 
             component.secondary = characterPrefab.AddComponent<GenericSkill>();
             SkillFamily newFamily = ScriptableObject.CreateInstance<SkillFamily>();
@@ -486,6 +496,8 @@ namespace Bastion
 
             ContentAddition.AddSkillDef(SkillDef);
 
+            Modules.Config.ConfigureSkillDef(SkillDef, configSection, "Utility");
+
             component.utility = characterPrefab.AddComponent<GenericSkill>();
             SkillFamily newFamily = ScriptableObject.CreateInstance<SkillFamily>();
             newFamily.variants = new SkillFamily.Variant[1];
@@ -509,7 +521,7 @@ namespace Bastion
             SkillDef.activationState = new SerializableEntityStateType(typeof(SpecialStart));
             SkillDef.activationStateMachineName = "Weapon";
             SkillDef.baseMaxStock = 1;
-            SkillDef.baseRechargeInterval = 50f;
+            SkillDef.baseRechargeInterval = 20f;
             SkillDef.beginSkillCooldownOnSkillEnd = true;
             SkillDef.canceledFromSprinting = false;
             SkillDef.fullRestockOnAssign = false;
@@ -526,6 +538,8 @@ namespace Bastion
             SkillDef.skillNameToken = SURVIVORNAMEKEY + "_SPEC";
 
             ContentAddition.AddSkillDef(SkillDef);
+
+            Modules.Config.ConfigureSkillDef(SkillDef, configSection, "Special");
 
             component.special = characterPrefab.AddComponent<GenericSkill>();
             SkillFamily newFamily = ScriptableObject.CreateInstance<SkillFamily>();

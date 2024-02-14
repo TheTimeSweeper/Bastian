@@ -10,12 +10,12 @@ namespace Bastion
         private float baseMaxSwingTime = 0.25f;
 
         private float baseEarlyExitTime = 0.38f;
-
-        private float baseDamageCoefficient = 2;
+        
+        private float baseDamageCoefficient = 2.5f;
 
         public override void OnEnter()
         {
-            hitboxGroupName = "SwordGroup";
+            hitboxGroupName = "Swing";
 
             damageType = DamageType.Generic;
             damageCoefficient = baseDamageCoefficient;
@@ -25,20 +25,22 @@ namespace Bastion
             baseDuration = 0.5f;
 
             attackStartPercentTime = baseSwingDelay / baseDuration;// 0.2f;
-            attackEndPercentTime = baseEarlyExitTime / baseDuration;// 0.4f;
+            attackEndPercentTime = baseMaxSwingTime / baseDuration;// 0.4f;
 
             earlyExitPercentTime = baseEarlyExitTime / baseDuration;// 0.6f;
 
-            hitStopDuration = 0.012f;
+            hitStopDuration = 0.05f;
             attackRecoil = 0.5f;
             hitHopVelocity = 4f;
-
-            swingSoundString = "HenrySwordSwing";
+            
+            swingSoundString = "";
             hitSoundString = "";
-            muzzleString = swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
-            playbackRateParam = "Slash.playbackRate";
+            //muzzleString = swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
+            playbackRateParam = "M1";
             swingEffectPrefab = null;// Prefabs.swingEffect;
             hitEffectPrefab = Prefabs.swingImpact;
+
+            AkSoundEngine.PostEvent(Sounds.Play_Bastian_Swing, base.gameObject);
 
             //impactSound = HenryAssets.swordHitSoundEvent.index;
 
@@ -47,8 +49,10 @@ namespace Bastion
 
         protected override void PlaySwingEffect()
         {
-            base.PlaySwingEffect();
-
+            Transform transform = base.FindModelChild("swingMuzzle");
+            int num = (this.swingIndex == 0) ? 1 : -1;
+            transform.localScale = new Vector3(num, 1f, 1f);
+            transform.localRotation = Quaternion.Euler(0f, -30 * num, 15 * num);
             GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(Prefabs.swingEffect, transform);
             gameObject.transform.localPosition = Vector3.zero;
             gameObject.transform.localRotation = Quaternion.Euler(90f, 240f, 0f);

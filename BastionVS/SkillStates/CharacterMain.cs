@@ -27,5 +27,15 @@ namespace Bastion
         {
             base.OnEnter();
         }
+
+        public override void Update()
+        {
+            base.Update();
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                Debug.LogWarning(GetModelAnimator().GetFloat("aimYawCycle"));
+                Debug.LogWarning(GetModelAnimator().GetFloat("aimPitchCycle"));
+            }
+        }
     }
 }

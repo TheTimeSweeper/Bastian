@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1527545765
+CRC: 990161626
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b3b0c744137d308c648119b0aca3b50d
+    Hash: e76b0ae33e05a3fd980fe419fb032b5e
   TypeTreeHash:
     serializedVersion: 2
     Hash: add0688581d36faf693b3be3de16c086
@@ -56,15 +56,16 @@ Assets:
 - Assets/bastionassets/animations/displayAnimator.controller
 - Assets/bastionassets/materials/Bastian_diffuse.png
 - Assets/bastionassets/materials/body.mat
-- Assets/bastionassets/BastianHumanoid.prefab
 - Assets/bastionassets/materials/BastianM_emission.png
 - Assets/bastionassets/animations/aim_yaw.mask
 - Assets/bastionassets/materials/maskOn.mat
 - Assets/bastionassets/icons/primary.png
 - Assets/bastionassets/materials/Bastian_normal.png
 - Assets/bastionassets/icons/portrait.png
+- Assets/bastionassets/BastianMeme.prefab
 - Assets/bastionassets/animations/upper_body.mask
 - Assets/bastionassets/materials/mask_diffuse.png
+- Assets/bastionassets/BastianOld.prefab
 - Assets/bastionassets/Bastian.prefab
 - Assets/bastionassets/materials/glitch.mat
 - Assets/bastionassets/icons/special.png

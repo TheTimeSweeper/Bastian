@@ -84,6 +84,9 @@ ModelImporter:
   - first:
       74: -8146231096655356941
     second: Armature|WalkR
+  - first:
+      74: -8015375254262166504
+    second: Armature|Dash.funny
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -388,11 +391,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Dash
-      takeName: Armature|Dash
+      name: Armature|Dash.funny
+      takeName: Armature|Dash.funny
       internalID: 0
       firstFrame: 0
-      lastFrame: 30
+      lastFrame: 31
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

@@ -25,30 +25,35 @@ namespace Bastion
     class Secondary : BaseSkillState
     {
         private float duration;
-        private float baseDuration = 0.3f;
+        private float baseDuration = 1f;
         private float fireDelay;
-        private float baseFireDelay = 0.08f;
+        private float baseFireDelay = 0.00f;
+        private float interruptTime = 0.3f;
+
         private bool hasFired;
-        private float damageCoefficient = 1.4f;
+        private float damageCoefficient = 2.0f;
+
         public override void OnEnter()
         {
             base.OnEnter();
             base.StartAimMode();
             duration = baseDuration / base.attackSpeedStat;
             fireDelay = baseFireDelay / base.attackSpeedStat;
-            if (base.isGrounded & !base.GetModelAnimator().GetBool("isMoving"))
-            {
-                base.PlayAnimation("FullBody, Override", "Shoot", "M2", this.duration);
-            }
-            else
-            {
-                base.PlayAnimation("Gesture, Override", "Shoot", "M2", this.duration);
-            }
+            interruptTime *= duration;
+
+            base.PlayAnimation("Gesture, Override", "Shoot", "M2", this.duration);
+            //if (base.isGrounded & !base.GetModelAnimator().GetBool("isMoving"))
+            //{
+            //    base.PlayAnimation("FullBody, Override", "Shoot", "M2", this.duration);
+            //}
+            //else
+            //{
+            //    base.PlayAnimation("Gesture, Override", "Shoot", "M2", this.duration);
+            //}
         }
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            base.characterBody.isSprinting = false;
             if (base.fixedAge >= fireDelay && !hasFired)
             {
                 hasFired = true;
@@ -84,8 +89,9 @@ namespace Bastion
                     muzzleName = "fingerMuzzle",
                     hitEffectPrefab = Prefabs.bulletImpact,
                     isCrit = base.RollCrit(),
-                    radius = 0.2f,
-                    maxDistance = 1000
+                    radius = 1f,
+                    maxDistance = 100,
+                    damageType = DamageType.Stun1s
                 }.Fire();
             }
         }
@@ -95,7 +101,11 @@ namespace Bastion
         }
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Skill;
+            if (base.fixedAge > interruptTime)
+            {
+                return InterruptPriority.Any;
+            }
+            return InterruptPriority.PrioritySkill;
         }
     }
 }

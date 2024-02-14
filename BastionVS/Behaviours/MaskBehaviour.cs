@@ -41,11 +41,11 @@ namespace Bastion
         {
             if (model)
             {
-                maskOn = model.baseRendererInfos[1].defaultMaterial;
+                maskOn = model.baseRendererInfos[3].defaultMaterial;
             }
             else
             {
-                mesh = base.GetComponentsInChildren<SkinnedMeshRenderer>()[1];
+                mesh = base.GetComponentsInChildren<SkinnedMeshRenderer>()[3];
                 maskOn = mesh.material;
             }
 
@@ -57,6 +57,8 @@ namespace Bastion
         }
         private void FixedUpdate()
         {
+            if (!effect)
+                return;
             stopwatch += Time.fixedDeltaTime;
             if (stopwatch >= duration && effect.isPlaying)
             {
@@ -64,11 +66,14 @@ namespace Bastion
                 duration = RoR2Application.rng.RangeFloat(minDuration, maxDuration);
                 if (model)
                 {
-                    model.baseRendererInfos[1].defaultMaterial = maskOn;
+                    model.baseRendererInfos[3].defaultMaterial = maskOn;
                 }
                 else
                 {
-                    mesh.material = maskOn;
+                    if (mesh)
+                    {
+                        mesh.sharedMaterial = maskOn;
+                    }
                 }
             }
             if (stopwatch >= cooldown + duration)
@@ -78,11 +83,14 @@ namespace Bastion
                 cooldown = RoR2Application.rng.RangeFloat(minCooldown, maxCooldown);
                 if (model)
                 {
-                    model.baseRendererInfos[1].defaultMaterial = maskOff;
+                    model.baseRendererInfos[3].defaultMaterial = maskOff;
                 }
                 else
                 {
-                    mesh.material = maskOff;
+                    if (mesh)
+                    {
+                        mesh.sharedMaterial = maskOff;
+                    }
                 }
             }
         }

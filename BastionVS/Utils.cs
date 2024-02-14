@@ -64,7 +64,7 @@ namespace Bastion
             skinDefInfo.Name = skinName;
             skinDefInfo.NameToken = skinName;
             skinDefInfo.RendererInfos = rendererInfos;
-            skinDefInfo.RootObject = renderers[1].transform.parent.gameObject;
+            skinDefInfo.RootObject = renderers[0].transform.parent.gameObject;
             skinDefInfo.UnlockableDef = null;
             return skinDefInfo;
         }

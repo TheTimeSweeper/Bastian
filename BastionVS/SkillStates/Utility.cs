@@ -24,27 +24,33 @@ namespace Bastion
 {
     class UtilityStart : BaseState
     {
-        private float duration = 0.2f;
+        private float duration = 0.29f;
+
+        public Vector3 dashVector;
+
         public override void OnEnter()
         {
             base.OnEnter();
+            duration /= attackSpeedStat;
             base.characterMotor.velocity = Vector3.zero;
-            base.PlayAnimation("FullBody, Override", "Dash", "Utility", 0.7f);
+            base.PlayAnimation("FullBody, Override", "Dash", "Utility", duration/0.29f);
             AkSoundEngine.PostEvent(Sounds.Play_Bastian_DashFast, base.gameObject);
+
+            characterBody.SetAimTimer(0);
         }
         public override void FixedUpdate()
         {
             base.FixedUpdate();
             if (base.fixedAge >= duration && base.isAuthority)
             {
-                this.outer.SetNextState(new Utility());
+                this.outer.SetNextState(new Utility ());
             }
         }
     }
     class Utility : BaseState
     {
+        public Vector3 dashVector;
         private CameraTargetParams.AimRequest request;
-        private Vector3 dashVector;
         private List<HealthComponent> hitList = new List<HealthComponent>();
 
         public override void OnEnter()
@@ -58,13 +64,28 @@ namespace Bastion
             {
                 base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
             }
+
+            GetDashVector();
+            if (dashVector.sqrMagnitude < Mathf.Epsilon)
+            {
+                this.dashVector = inputBank.aimDirection;
+            }
             //base.gameObject.layer = LayerIndex.fakeActor.intVal;
-            this.dashVector = base.inputBank.aimDirection;
             base.characterDirection.forward = this.dashVector;
 
-            Transform transform = base.FindModelChild("center");
-            GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(Prefabs.dashEffect, transform.position + dashVector * 4f, Util.QuaternionSafeLookRotation(-dashVector)); 
+            Transform centerTransform = base.FindModelChild("center");
+            GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(Prefabs.dashEffect, centerTransform.position + dashVector * 4f, Util.QuaternionSafeLookRotation(-dashVector));
 
+        }
+
+        private void GetDashVector()
+        {
+            Vector3 aimDirection = inputBank.aimDirection;
+            aimDirection.y = 0;
+            Vector3 rightDirection = -Vector3.Cross(Vector3.up, aimDirection);
+            float angle = Vector3.Angle(inputBank.aimDirection, aimDirection);
+            if (inputBank.aimDirection.y < 0) angle = -angle;
+            this.dashVector = Quaternion.AngleAxis(angle, rightDirection) * inputBank.moveVector;
         }
         public override void FixedUpdate()
         {
@@ -93,6 +114,14 @@ namespace Bastion
                         hitList.Add(component.healthComponent);
                         SetStateOnHurt.SetStunOnObject(component.healthComponent.gameObject, 1);
                         AkSoundEngine.PostEvent(Sounds.Play_Bastian_Stun, component.healthComponent.gameObject);
+
+
+                        EffectManager.SpawnEffect(Prefabs.swingImpact, new EffectData
+                        {
+                            origin = component.transform.position,
+                            rotation = Util.QuaternionSafeLookRotation(transform.forward),
+                            //networkSoundEventIndex = this.impactSound
+                        }, true);
                     }
                 }
             }
