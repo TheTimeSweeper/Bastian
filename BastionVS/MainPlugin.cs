@@ -205,6 +205,9 @@ namespace Bastian
             masterySkinUnlockableDef.achievementIcon = masterySkinIcon;
             ContentAddition.AddUnlockableDef(masterySkinUnlockableDef);
 
+            LanguageAPI.Add(Modules.Tokens.GetAchievementNameToken(BastianMasteryAchievement.identifier), "Translator: Mastery");
+            LanguageAPI.Add(Modules.Tokens.GetAchievementDescriptionToken(BastianMasteryAchievement.identifier), "As Translator, beat the game or obliterate on Monsoon");
+
             var meshes = model.GetComponentsInChildren<SkinnedMeshRenderer>();
             modelSkinController.skins = new SkinDef[]
             {
