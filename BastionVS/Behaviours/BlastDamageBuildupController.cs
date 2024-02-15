@@ -8,7 +8,7 @@ namespace Bastian
     public class BlastDamageBuildupController : MonoBehaviour/*, IOnDamageDealtServerReceiver*/
     {
         public float charge;
-
+        
         private CharacterBody characterBody;
         private GenericSkill skill => characterBody.skillLocator.special;
         void Start()

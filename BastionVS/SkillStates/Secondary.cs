@@ -41,11 +41,11 @@ namespace Bastian
             fireDelay = baseFireDelay / base.attackSpeedStat;
             interruptPercentTime *= duration;
 
-            base.PlayAnimation("Gesture, Override", "Shoot", "M2", this.duration);
-            if (base.isGrounded & !base.GetModelAnimator().GetBool("isMoving"))
-            {
-                base.PlayAnimation("FullBody, Override", "Shoot", "M2", this.duration);
-            }
+            base.PlayAnimation("Gesture, Aimed", "Shoot", "M2", this.duration);
+            //if (base.isGrounded & !base.GetModelAnimator().GetBool("isMoving"))
+            //{
+            //    base.PlayAnimation("FullBody, Override", "Shoot", "M2", this.duration);
+            //}
         }
         public override void FixedUpdate()
         {

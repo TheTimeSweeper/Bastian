@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2812102754
+CRC: 1190175062
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 5614c29af4de5e5180603b8cef53069a
+    Hash: 52c75a45cc09b97e91f5052b4a41ea42
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 8c160b5ae8fd1d44d682adf6bb9e0d9d
+    Hash: add0688581d36faf693b3be3de16c086
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -31,8 +31,6 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: 3ac29d34696dd834fae8a7d466908cc1, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: d4d99907bed687a44a8d80d488403300, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 135
@@ -73,10 +71,9 @@ Assets:
 - Assets/bastionassets/icons/special.png
 - Assets/bastionassets/materials/glitch.png
 - Assets/bastionassets/icons/utility.png
-- Assets/bastionassets/animations/Animator 1.controller
+- Assets/bastionassets/animations/Animator.controller
 - Assets/bastionassets/icons/secondary.png
 - Assets/bastionassets/animations/aim_pitch.mask
 - Assets/bastionassets/materials/BastianM_diffuse.png
 - Assets/bastionassets/materials/mask_emission.png
-- Assets/bastionassets/animations/Animator.controller
 Dependencies: []

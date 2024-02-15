@@ -31,7 +31,7 @@ namespace Bastian
             base.OnEnter();
             duration /= attackSpeedStat;
             base.characterMotor.velocity = Vector3.zero;
-            base.PlayAnimation("FullBody, Override", "Dash", "Utility", duration/0.29f);
+            base.PlayAnimation("FullBody, Override", "Dash Windup", "Utility", duration);
             AkSoundEngine.PostEvent(Sounds.Play_Bastian_DashFast, base.gameObject);
 
             characterBody.SetAimTimer(0);
@@ -54,6 +54,9 @@ namespace Bastian
         public override void OnEnter()
         {
             base.OnEnter();
+
+            base.PlayAnimation("FullBody, Override", "Dash");
+
             if (base.cameraTargetParams)
             {
                 request = base.cameraTargetParams.RequestAimType(CameraTargetParams.AimType.Aura);
