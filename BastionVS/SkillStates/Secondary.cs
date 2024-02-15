@@ -42,6 +42,7 @@ namespace Bastian
             interruptPercentTime *= duration;
 
             base.PlayAnimation("Gesture, Aimed", "Shoot", "M2", this.duration);
+            base.PlayAnimation("Gesture, Override", "BufferEmpty");
             //if (base.isGrounded & !base.GetModelAnimator().GetBool("isMoving"))
             //{
             //    base.PlayAnimation("FullBody, Override", "Shoot", "M2", this.duration);

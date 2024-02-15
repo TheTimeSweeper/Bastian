@@ -49,7 +49,7 @@ namespace Bastian
             damageCount = ScriptableObject.CreateInstance<BuffDef>();
             damageCount.buffColor = MainPlugin.characterColor;
             damageCount.canStack = true;
-            damageCount.iconSprite = Load<Sprite>("RoR2/Base/Common/texMovespeedBuffIcon.tif");
+            damageCount.iconSprite = Load<Sprite>("RoR2/Base/ShockNearby/texBuffTeslaIcon.tif");
             ContentAddition.AddBuffDef(damageCount);
 
             muzzleflash = PrefabAPI.InstantiateClone(Load<GameObject>("RoR2/Base/Common/VFX/Muzzleflash1.prefab"), "Muzzleflash", false);

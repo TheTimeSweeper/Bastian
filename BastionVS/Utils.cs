@@ -39,7 +39,7 @@ namespace Bastian
             characterDisplay.GetComponentInChildren<Animator>().runtimeAnimatorController = Assets.MainAssetBundle.LoadAsset<RuntimeAnimatorController>("displayAnimator");
             return characterDisplay;
         }
-        internal static LoadoutAPI.SkinDefInfo CreateNewSkinDefInfo(SkinnedMeshRenderer[] renderers, string skinName, string objectToEnable, CharacterModel.RendererInfo[] rendererInfos, Sprite icon)
+        internal static LoadoutAPI.SkinDefInfo CreateNewSkinDefInfo(SkinnedMeshRenderer[] renderers, string skinName, string objectToEnable, CharacterModel.RendererInfo[] rendererInfos, Sprite icon, UnlockableDef unlockableDef = null)
         {
             LoadoutAPI.SkinDefInfo skinDefInfo = default(LoadoutAPI.SkinDefInfo);
             skinDefInfo.BaseSkins = Array.Empty<SkinDef>();
@@ -66,7 +66,7 @@ namespace Bastian
             skinDefInfo.NameToken = skinName;
             skinDefInfo.RendererInfos = rendererInfos;
             skinDefInfo.RootObject = renderers[0].transform.parent.gameObject;
-            skinDefInfo.UnlockableDef = null;
+            skinDefInfo.UnlockableDef = unlockableDef;
             return skinDefInfo;
         }
         public static GameObject CreateHitbox(string name, Transform parent, Vector3 scale)

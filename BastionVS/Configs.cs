@@ -12,6 +12,8 @@ namespace Bastian
         public static ConfigEntry<float> M2_Damage;
         public static ConfigEntry<float> M2_Duration;
 
+        public static ConfigEntry<float> M3_Duration;
+
         public static ConfigEntry<float> M4_Charge_Multiplier;
         public static ConfigEntry<float> M4_Min_Damage;
         public static ConfigEntry<float> M4_Max_Damage;
@@ -67,6 +69,13 @@ namespace Bastian
                 20,
                 "");
 
+            M3_Duration = Config.BindAndOptions(
+                SectionSkills,
+                "M3_Duration",
+                0.169f,
+                0,
+                2,
+                "aka distance");
 
             M4_Charge_Multiplier = Config.BindAndOptions(
                 SectionSkills,
@@ -103,10 +112,10 @@ namespace Bastian
             M4_Regen = Config.BindAndOptions(
                 SectionSkills,
                 "M4_Regen",
-                0.5f,
+                0.3f,
                 0,
                 3,
-                "");
+                "regen after expending your health");
 
             M4_hop= Config.BindAndOptions(
                 SectionSkills,

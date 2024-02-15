@@ -397,7 +397,7 @@ ModelImporter:
       takeName: Armature|Dash.funny
       internalID: 0
       firstFrame: 0
-      lastFrame: 24
+      lastFrame: 21
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1047,7 +1047,7 @@ ModelImporter:
       takeName: Armature|Dash.windup
       internalID: 0
       firstFrame: 0
-      lastFrame: 7
+      lastFrame: 9
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

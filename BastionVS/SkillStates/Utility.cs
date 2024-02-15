@@ -50,13 +50,13 @@ namespace Bastian
         public Vector3 dashVector;
         private CameraTargetParams.AimRequest request;
         private List<HealthComponent> hitList = new List<HealthComponent>();
-
+        private float duration = Configs.M3_Duration.Value;
         public override void OnEnter()
         {
             base.OnEnter();
 
-            base.PlayAnimation("FullBody, Override", "Dash");
-
+            base.PlayAnimation("FullBody, Override", "Dash", "Utility", duration * 3);
+            
             if (base.cameraTargetParams)
             {
                 request = base.cameraTargetParams.RequestAimType(CameraTargetParams.AimType.Aura);
@@ -76,7 +76,6 @@ namespace Bastian
 
             Transform centerTransform = base.FindModelChild("center");
             GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(Prefabs.dashEffect, centerTransform.position + dashVector * 4f, Util.QuaternionSafeLookRotation(-dashVector));
-
         }
 
         private void GetDashVector()
@@ -86,7 +85,7 @@ namespace Bastian
             Vector3 rightDirection = -Vector3.Cross(Vector3.up, aimDirection);
             float angle = Vector3.Angle(inputBank.aimDirection, aimDirection);
             if (inputBank.aimDirection.y < 0) angle = -angle;
-            this.dashVector = Quaternion.AngleAxis(angle, rightDirection) * inputBank.moveVector;
+            this.dashVector = Vector3.Normalize(Quaternion.AngleAxis(angle, rightDirection) * inputBank.moveVector);
         }
         public override void FixedUpdate()
         {
@@ -96,7 +95,7 @@ namespace Bastian
             {
                 base.characterMotor.rootMotion += this.dashVector * (this.moveSpeedStat * EntityStates.Merc.EvisDash.speedCoefficient * Time.fixedDeltaTime);
             }
-            if (base.fixedAge >= 0.2f && base.isAuthority)
+            if (base.fixedAge >= duration && base.isAuthority)
             {
                 this.outer.SetNextStateToMain();
             }
@@ -140,7 +139,7 @@ namespace Bastian
             }
             if (base.isAuthority)
             {
-                base.characterMotor.velocity *= 0.1f;
+                base.characterMotor.velocity *= 0.3f;
                 base.SmallHop(base.characterMotor, EntityStates.Merc.Assaulter.smallHopVelocity);
             }
             base.OnExit();

@@ -28,7 +28,7 @@ namespace Bastian
     [BepInDependency("com.weliveinasociety.CustomEmotesAPI", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency(R2API.ContentManagement.R2APIContentManager.PluginGUID)]
     [BepInDependency(R2API.LanguageAPI.PluginGUID)]
-    [BepInDependency(R2API.LoadoutAPI.PluginGUID)]
+    [BepInDependency(R2API.Skins.PluginGUID)]
     //[BepInDependency(R2API.Networking.NetworkingAPI.PluginGUID)]
     [BepInDependency(R2API.PrefabAPI.PluginGUID)]
     [BepInDependency(R2API.SoundAPI.PluginGUID)]
@@ -187,16 +187,29 @@ namespace Bastian
             characterModel.invisibilityCount = 0;
             characterModel.temporaryOverlays = new List<TemporaryOverlay>();
             characterModel.mainSkinnedMeshRenderer = model.GetComponentInChildren<SkinnedMeshRenderer>();
+            ItemDisplayRuleSet itemDisplayRuleSet = ScriptableObject.CreateInstance<ItemDisplayRuleSet>();
+            itemDisplayRuleSet.name = "idrs" + bodyComponent.name;
+
+            characterModel.itemDisplayRuleSet = itemDisplayRuleSet;
+            new BastianItemDisplays().Init(itemDisplayRuleSet);
 
             ModelSkinController modelSkinController = model.AddComponent<ModelSkinController>();
             LanguageAPI.Add(SURVIVORNAMEKEY + "BODY_DEFAULT_SKIN_NAME", "Default");
             LanguageAPI.Add(SURVIVORNAMEKEY + "BODY_MASTERY_SKIN_NAME", "Mastery");
 
-            var meshes = model.GetComponentsInChildren<SkinnedMeshRenderer>(); 
+            Sprite masterySkinIcon = R2API.Skins.CreateSkinIcon(new Color(0.81176f, 0.22745f, 0.25882f), new Color(0.93333f, 0.87843f, 0.79608f), new Color(0.22745f, 0.2078f, 0.17647f), new Color(0.67451f, 0.51373f, 0.27451f));
+
+            UnlockableDef masterySkinUnlockableDef = ScriptableObject.CreateInstance<UnlockableDef>();
+            masterySkinUnlockableDef.cachedName = BastianMasteryAchievement.unlockableIdentifier;
+            masterySkinUnlockableDef.nameToken = Modules.Tokens.GetAchievementNameToken(BastianMasteryAchievement.identifier);
+            masterySkinUnlockableDef.achievementIcon = masterySkinIcon;
+            ContentAddition.AddUnlockableDef(masterySkinUnlockableDef);
+
+            var meshes = model.GetComponentsInChildren<SkinnedMeshRenderer>();
             modelSkinController.skins = new SkinDef[]
             {
-                LoadoutAPI.CreateNewSkinDef(Utils.CreateNewSkinDefInfo(meshes, SURVIVORNAMEKEY + "BODY_DEFAULT_SKIN_NAME", "body", rendererInfos, LoadoutAPI.CreateSkinIcon(new Color(0.86275f, 0.50980f, 0.80784f), new Color(0.47059f, 0.46275f, 0.48235f), new Color(0.20392f, 0.18824f, 0.21961f), new Color(0.76471f, 0.70196f, 0.72549f)))),
-                LoadoutAPI.CreateNewSkinDef(Utils.CreateNewSkinDefInfo(meshes, SURVIVORNAMEKEY + "BODY_MASTERY_SKIN_NAME", "skin", rendererInfos, LoadoutAPI.CreateSkinIcon(new Color(0.81176f, 0.22745f, 0.25882f), new Color(0.93333f, 0.87843f, 0.79608f), new Color(0.22745f, 0.2078f, 0.17647f), new Color(0.67451f, 0.51373f, 0.27451f))))
+                R2API.Skins.CreateNewSkinDef(Utils.CreateNewSkinDefInfo(meshes, SURVIVORNAMEKEY + "BODY_DEFAULT_SKIN_NAME", "body", rendererInfos, R2API.Skins.CreateSkinIcon(new Color(0.86275f, 0.50980f, 0.80784f), new Color(0.47059f, 0.46275f, 0.48235f), new Color(0.20392f, 0.18824f, 0.21961f), new Color(0.76471f, 0.70196f, 0.72549f)))),
+                R2API.Skins.CreateNewSkinDef(Utils.CreateNewSkinDefInfo(meshes, SURVIVORNAMEKEY + "BODY_MASTERY_SKIN_NAME", "skin", rendererInfos, masterySkinIcon, masterySkinUnlockableDef))
             };
 
             childLocator.FindChild("skin").gameObject.SetActive(false);

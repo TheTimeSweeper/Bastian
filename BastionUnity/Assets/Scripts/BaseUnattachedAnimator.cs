@@ -6,7 +6,7 @@ public class BaseUnattachedAnimator : MonoBehaviour {
     [System.Serializable]
     public class UnattachedAnimation {
         public string animationState;
-        public int layer;
+        public string layer;
     }
 
     [System.Serializable]
@@ -115,7 +115,13 @@ public class BaseUnattachedAnimator : MonoBehaviour {
 
             List<UnattachedAnimation> animations = combo.comboAnimations[combo.comboStep].animations;
             for (int i = 0; i < animations.Count; i++) {
-                animator.Play(animations[i].animationState, animations[i].layer);
+
+                int layerIndex = animator.GetLayerIndex(animations[i].layer);
+                animator.speed = 1f;
+                animator.Update(0f);
+                animator.PlayInFixedTime(animations[i].animationState, layerIndex, 0f);
+
+                //animator.Play(animations[i].animationState, animator.GetLayerIndex(animations[i].layer));
             }
 
             combo.comboTimer = 2;
