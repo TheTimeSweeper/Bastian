@@ -1,4 +1,5 @@
 ﻿using Bastian.Modules;
+using System.Runtime.CompilerServices;
 
 namespace Bastian
 {
@@ -19,12 +20,13 @@ namespace Bastian
         public static ConfigEntry<float> M4_Max_Damage;
         public static ConfigEntry<float> M4_Blast_Radius;
         public static ConfigEntry<float> M4_Regen;
-        public static ConfigEntry<float> M4_AntiGravity;
-        public static ConfigEntry<float> M4_hop;
+        public static ConfigEntry<float> M4_Health_Cost;
+        public static ConfigEntry<float> M4_Charge_Decay;
+        public static ConfigEntry<float> M4_Charge_Decay_Delay;
 
         public static string SectionGeneral = "0. General";
-        public static string SectionBody = "1. Bastian Body TEST";
-        public static string SectionSkills = "2. Bastian Skills TEST";
+        public static string SectionBody = "1. Bastian Body";
+        public static string SectionSkills = "2. Bastian Skills";
 
         public static void InitGeneral()
         {
@@ -80,7 +82,7 @@ namespace Bastian
             M4_Charge_Multiplier = Config.BindAndOptions(
                 SectionSkills,
                 "M4_Charge_Multiplier",
-                0.5f,
+                0.4f,
                 0,
                 20,
                 "");
@@ -104,26 +106,42 @@ namespace Bastian
             M4_Blast_Radius = Config.BindAndOptions(
                 SectionSkills,
                 "M4_Blast_Radius",
-                30.0f,
+                40.0f,
                 0,
                 100,
                 "");
+
+            M4_Health_Cost = Config.BindAndOptions(
+                SectionSkills,
+                "M4_Health_Cost",
+                0.33f,
+                0,
+                1,
+                "% of health cost to use this move");
 
             M4_Regen = Config.BindAndOptions(
                 SectionSkills,
                 "M4_Regen",
-                0.3f,
+                0.1f,
                 0,
                 3,
                 "regen after expending your health");
 
-            M4_hop= Config.BindAndOptions(
+            M4_Charge_Decay = Config.BindAndOptions(
                 SectionSkills,
-                "M4_hop",
-                2f,
+                "M4_Charge_Decay",
+                5f,
                 0,
-                100,
-                "");
+                20,
+                "amount of charge deceayed per second");
+
+            M4_Charge_Decay_Delay = Config.BindAndOptions(
+                SectionSkills,
+                "M4_Charge_Decay_Delay",
+                5f,
+                0,
+                20,
+                "delay between gaining charges that they start to decay");
         }
     }
 }

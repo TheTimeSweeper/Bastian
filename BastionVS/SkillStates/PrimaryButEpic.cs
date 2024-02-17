@@ -45,7 +45,7 @@ namespace Bastian
 
             //R2API.DamageAPI.AddModdedDamageType(attack, Prefabs.buildupDamage);
         }
-
+        
         public override void FixedUpdate()
         {
             base.FixedUpdate();
@@ -55,8 +55,8 @@ namespace Bastian
         protected override void PlaySwingEffect()
         {
             Transform transform = base.FindModelChild("swingMuzzle");
-            int num = (this.swingIndex == 0) ? 1 : -1;
-            transform.localScale = new Vector3(num, 1f, 1f);
+            float num = (this.swingIndex == 0) ? 1.5f : -1.5f;
+            transform.localScale = new Vector3(num, 1.5f, 1.5f);
             transform.localRotation = Quaternion.Euler(0f, -30 * num, 15 * num);
             GameObject gameObject = UnityEngine.Object.Instantiate<GameObject>(Prefabs.swingEffect, transform);
             gameObject.transform.localPosition = Vector3.zero;
@@ -69,7 +69,7 @@ namespace Bastian
             base.OnHitEnemyAuthority();
             if (blastor)
             {
-                blastor.FillCharge(damageCoefficient);
+                blastor.FillChargeAuthority(damageCoefficient);
             }
         }
 

@@ -41,15 +41,12 @@ namespace Bastian
             AkSoundEngine.PostEvent(Sounds.Play_Bastian_FullBurst, base.gameObject);
             Transform transform = base.FindModelChild("center");
             UnityEngine.Object.Instantiate<GameObject>(Prefabs.chargeSphere, transform.position, Quaternion.identity, transform);
-
-            if (componentFromSkillDef && isAuthority)
+            
+            if (componentFromSkillDef)
             {
                 charge = componentFromSkillDef.charge;
+                componentFromSkillDef.ResetChargeAuthority();
             }
-
-            componentFromSkillDef.ResetCharge();
-
-            Debug.LogWarning($"casting with charge {charge}. auth {isAuthority} net {NetworkServer.active}");
 
             if (base.cameraTargetParams)
             {
@@ -77,7 +74,7 @@ namespace Bastian
             if (base.fixedAge >= duration)
             {
                 success = true;
-                if (NetworkServer.active)
+                if (isAuthority)
                 {
                     this.outer.SetNextState(new Special { charge = charge });
                 }
@@ -126,7 +123,6 @@ namespace Bastian
         public override void OnEnter()
         {
             base.OnEnter();
-            Debug.LogWarning($"blasting with charge {charge}. auth {isAuthority} net {NetworkServer.active}");
             duration /= attackSpeedStat;
             fireDelay = duration * 0.16f;
             PlayCrossfade("FullBody, Override", "Release", "Special", duration, duration * 0.1f);
@@ -141,19 +137,8 @@ namespace Bastian
             if (base.fixedAge >= fireDelay && !hasFired)
             {
                 hasFired = true;
-                if (NetworkServer.active)
+                if (isAuthority)
                 {
-                    DamageInfo damageInfo = new DamageInfo();
-                    damageInfo.damage = base.healthComponent.health / 3;
-                    damageInfo.position = base.characterBody.corePosition;
-                    damageInfo.procCoefficient = 0;
-                    damageInfo.procChainMask = default(ProcChainMask);
-                    damageInfo.crit = false;
-                    base.healthComponent.TakeDamage(damageInfo);
-
-                    base.characterBody.AddTimedBuff(Prefabs.speed, 10);
-                }
-                if (isAuthority) {
                     new BlastAttack
                     {
                         attacker = base.gameObject,
@@ -167,6 +152,18 @@ namespace Bastian
                         attackerFiltering = AttackerFiltering.NeverHitSelf,
                         teamIndex = base.teamComponent.teamIndex,
                     }.Fire();
+                }
+                if (NetworkServer.active)
+                {
+                    DamageInfo damageInfo = new DamageInfo();
+                    damageInfo.damage = base.healthComponent.health * Configs.M4_Health_Cost.Value;
+                    damageInfo.position = base.characterBody.corePosition;
+                    damageInfo.procCoefficient = 0;
+                    damageInfo.procChainMask = default(ProcChainMask);
+                    damageInfo.crit = false;
+                    base.healthComponent.TakeDamage(damageInfo);
+
+                    base.characterBody.AddTimedBuff(Prefabs.speed, 10);
                 }
                 EffectManager.SpawnEffect(Prefabs.explosionEffect, new EffectData() { origin = characterBody.corePosition, scale = Configs.M4_Blast_Radius.Value }, false);
 

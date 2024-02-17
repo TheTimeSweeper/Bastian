@@ -521,7 +521,7 @@ MonoBehaviour:
     comboTimer: 0
     comboStep: 0
   - name: dash
-    keyCode: 102
+    keyCode: 304
     comboAnimations:
     - animations:
       - animationState: Dash

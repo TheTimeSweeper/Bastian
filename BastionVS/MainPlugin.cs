@@ -20,16 +20,18 @@ using System.Linq;
 using R2API.ContentManagement;
 using UnityEngine.AddressableAssets;
 using Bastian.SkillDefs;
+using Bastian.Modules;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
 namespace Bastian
 {
+    [BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.weliveinasociety.CustomEmotesAPI", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency(R2API.ContentManagement.R2APIContentManager.PluginGUID)]
     [BepInDependency(R2API.LanguageAPI.PluginGUID)]
     [BepInDependency(R2API.Skins.PluginGUID)]
-    //[BepInDependency(R2API.Networking.NetworkingAPI.PluginGUID)]
+    [BepInDependency(R2API.Networking.NetworkingAPI.PluginGUID)]
     [BepInDependency(R2API.PrefabAPI.PluginGUID)]
     [BepInDependency(R2API.SoundAPI.PluginGUID)]
     [BepInDependency(R2API.RecalculateStatsAPI.PluginGUID)]
@@ -37,9 +39,9 @@ namespace Bastian
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     public class MainPlugin : BaseUnityPlugin
     {
-        public const string MODUID = "com.Silly.Bastian";
+        public const string MODUID = "com.TeamSillyGuy.Bastian";
         public const string MODNAME = "Bastian";
-        public const string VERSION = "1.0.0";
+        public const string VERSION = "2.0.0";
         public const string SURVIVORNAME = "Bastian";
         public const string SURVIVORNAMEKEY = "BASTIAN";
 
@@ -58,12 +60,20 @@ namespace Bastian
             RegisterStates();
             RegisterCharacter();
             Hook.Hooks();
-
             Configs.InitSkills();
+            BastianTokens.Init();
+
+            R2API.Networking.NetworkingAPI.RegisterMessageType<Networking.SyncFillCharge>();
+            R2API.Networking.NetworkingAPI.RegisterMessageType<Networking.SyncResetCharge>();
 
             if (ModCompat.EmoteAPIEnabled)
             {
-                ModCompat.AddEmoteSupport();
+                ModCompat.InitEmoteSupport();
+            }
+
+            if (ModCompat.ROOEnabled)
+            {
+                ModCompat.InitROOSupport(Assets.MainAssetBundle.LoadAsset<Sprite>("portrait"));
             }
         }
         internal static void CreatePrefab()
@@ -142,13 +152,13 @@ namespace Bastian
             Modules.Config.ConfigureBody(bodyComponent, Configs.SectionBody);
 
             HealthComponent healthComponent = characterPrefab.GetComponent<HealthComponent>();
-            healthComponent.health = bodyComponent.maxHealth;
-            healthComponent.shield = 0f;
-            healthComponent.barrier = 0f;
-            healthComponent.magnetiCharge = 0f;
-            healthComponent.body = null;
-            healthComponent.dontShowHealthbar = false;
-            healthComponent.globalDeathEventChanceCoefficient = 1f;
+            //healthComponent.health = bodyComponent.maxHealth;
+            //healthComponent.shield = 0f;
+            //healthComponent.barrier = 0f;
+            //healthComponent.magnetiCharge = 0f;
+            //healthComponent.body = null;
+            //healthComponent.dontShowHealthbar = false;
+            //healthComponent.globalDeathEventChanceCoefficient = 1f;
 
             ModelLocator modelLocator = characterPrefab.GetComponent<ModelLocator>();
             modelLocator.modelTransform = transform;
@@ -187,6 +197,7 @@ namespace Bastian
             characterModel.invisibilityCount = 0;
             characterModel.temporaryOverlays = new List<TemporaryOverlay>();
             characterModel.mainSkinnedMeshRenderer = model.GetComponentInChildren<SkinnedMeshRenderer>();
+
             ItemDisplayRuleSet itemDisplayRuleSet = ScriptableObject.CreateInstance<ItemDisplayRuleSet>();
             itemDisplayRuleSet.name = "idrs" + bodyComponent.name;
 
@@ -194,8 +205,6 @@ namespace Bastian
             new BastianItemDisplays().Init(itemDisplayRuleSet);
 
             ModelSkinController modelSkinController = model.AddComponent<ModelSkinController>();
-            LanguageAPI.Add(SURVIVORNAMEKEY + "BODY_DEFAULT_SKIN_NAME", "Default");
-            LanguageAPI.Add(SURVIVORNAMEKEY + "BODY_MASTERY_SKIN_NAME", "Mastery");
 
             Sprite masterySkinIcon = R2API.Skins.CreateSkinIcon(new Color(0.81176f, 0.22745f, 0.25882f), new Color(0.93333f, 0.87843f, 0.79608f), new Color(0.22745f, 0.2078f, 0.17647f), new Color(0.67451f, 0.51373f, 0.27451f));
 
@@ -204,9 +213,6 @@ namespace Bastian
             masterySkinUnlockableDef.nameToken = Modules.Tokens.GetAchievementNameToken(BastianMasteryAchievement.identifier);
             masterySkinUnlockableDef.achievementIcon = masterySkinIcon;
             ContentAddition.AddUnlockableDef(masterySkinUnlockableDef);
-
-            LanguageAPI.Add(Modules.Tokens.GetAchievementNameToken(BastianMasteryAchievement.identifier), "Translator: Mastery");
-            LanguageAPI.Add(Modules.Tokens.GetAchievementDescriptionToken(BastianMasteryAchievement.identifier), "As Translator, beat the game or obliterate on Monsoon");
 
             var meshes = model.GetComponentsInChildren<SkinnedMeshRenderer>();
             modelSkinController.skins = new SkinDef[]
@@ -333,29 +339,6 @@ namespace Bastian
         }
         private void RegisterCharacter()
         {
-            string desc = "A translator gone rogue, this new and improved model seeks to improve on his older counterparts, by any means necessary." +
-                "<style=cSub>\r\n\r\n< ! > Shocking swing is an attack that's meant to be consistent, keeping the damage up and allowing him to melt down boss health."
-                + Environment.NewLine +
-                "<style=cSub>\r\n\r\n< ! > Nano-Spring allows Bastian to find his way out of a packed crowd, stunning enemies to allow for a few seconds of relief."
-                + Environment.NewLine +
-                "<style=cSub>\r\n\r\n< ! > For long-ranged enemies, Micro-Bullet is your best friend. Combined with backup mags, this is a lethal combo that can deal damage as fast as you can click."
-                + Environment.NewLine +
-                "<style=cSub>\r\n\r\n< ! > FOR EMERGENCIES ONLY! All Bastian Models are equipped with a \"Self - Utilized Ion Charge/ Internal Detonation for Emergencies\", dubbed the \"Architect Burst\" which will detonate the model and anything in it's surrounding area. Survival is possible, but only if action is taken IMMEDIATELY after usage.";
-
-            string outro = "..and so he left, his faith in those he spoke for dwindling, and his sense of self blooming.";
-            string fail = "..and so he vanished, a single spark among the current of change.";
-            string lore = "A local robot, built to help negotiate deals with foreign planetary bodies. His original purpose was to function as a middle-man, designed to survive on planets with air and temps that a normal human couldn't withstand. " +
-                "He was brought aboard the UES Contact Light as part of a backup plan, in case any negotiations for the survival of the other crew members came into play. " +
-                "However, he ended up being reprogrammed for combat, despite this being a simple grab-and-go mission.";
-
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_NAME", "Translator");
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_NAME_EPIC", "Bastian");
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_DESCRIPTION", desc);
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_SUBTITLE", "Model 4.I.N.K.");
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_OUTRO", outro);
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_FAIL", fail);
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_LORE", lore);
-
             var survivorDef = ScriptableObject.CreateInstance<SurvivorDef>();
             {
                 survivorDef.cachedName = SURVIVORNAMEKEY + "_NAME";
@@ -405,9 +388,6 @@ namespace Bastian
         void PrimarySetup()
         {
             SkillLocator component = characterPrefab.GetComponent<SkillLocator>();
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_M1", "Shocking Swing");
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_M1_DESCRIPTION", "Deliver a shocking punch for <style=cIsDamage>250% damage</style>.");
-
             var SkillDef = ScriptableObject.CreateInstance<SteppedSkillDef>();
             SkillDef.activationState = new SerializableEntityStateType(typeof(PrimaryButEpic));
             SkillDef.activationStateMachineName = "Weapon";
@@ -448,15 +428,12 @@ namespace Bastian
         void SecondarySetup()
         {
             SkillLocator component = characterPrefab.GetComponent<SkillLocator>();
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_M2", "Micro-Bullet");
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_M2_DESCRIPTION", "Fire 5 rounds of energy charges, each dealing <style=cIsDamage>200% damage</style>.");
-
             var SkillDef = ScriptableObject.CreateInstance<SkillDef>();
             SkillDef.activationState = new SerializableEntityStateType(typeof(Secondary));
             SkillDef.activationStateMachineName = "Weapon";
             SkillDef.baseMaxStock = 5;
             SkillDef.baseRechargeInterval = 8f;
-            SkillDef.beginSkillCooldownOnSkillEnd = true;
+            SkillDef.beginSkillCooldownOnSkillEnd = false;
             SkillDef.canceledFromSprinting = false;
             SkillDef.fullRestockOnAssign = true;
             SkillDef.interruptPriority = InterruptPriority.Skill;
@@ -470,6 +447,7 @@ namespace Bastian
             SkillDef.skillDescriptionToken = SURVIVORNAMEKEY + "_M2_DESCRIPTION";
             SkillDef.skillName = SURVIVORNAMEKEY + "_M2";
             SkillDef.skillNameToken = SURVIVORNAMEKEY + "_M2";
+            SkillDef.keywordTokens = new string[] { "KEYWORD_STUNNING" };
 
             ContentAddition.AddSkillDef(SkillDef);
 
@@ -492,9 +470,6 @@ namespace Bastian
         void UtilitySetup()
         {
             SkillLocator component = characterPrefab.GetComponent<SkillLocator>();
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_UTIL", "Nano-Spring");
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_UTIL_DESCRIPTION", "Execute a rapid dash in any given direction, stunning enemies in your path.");
-
             var SkillDef = ScriptableObject.CreateInstance<SkillDef>();
             SkillDef.activationState = new SerializableEntityStateType(typeof(UtilityStart));
             SkillDef.activationStateMachineName = "Body";
@@ -515,6 +490,7 @@ namespace Bastian
             SkillDef.skillDescriptionToken = SURVIVORNAMEKEY + "_UTIL_DESCRIPTION";
             SkillDef.skillName = SURVIVORNAMEKEY + "_UTIL";
             SkillDef.skillNameToken = SURVIVORNAMEKEY + "_UTIL";
+            SkillDef.keywordTokens = new string[] { "KEYWORD_STUNNING" };
 
             ContentAddition.AddSkillDef(SkillDef);
 
@@ -536,9 +512,6 @@ namespace Bastian
         void SpecialSetup()
         {
             SkillLocator component = characterPrefab.GetComponent<SkillLocator>();
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_SPEC", "Architect Burst");
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_SPEC_DESCRIPTION", "<style=cIsUtility>EVASIVE</style>. Overload your body for a massive damage burst, at the cost of your movement speed and <style=cIsHealth>1/3 health</style>.");
-
             var SkillDef = ScriptableObject.CreateInstance<HasBlastDamageBuildupSkillDef>();
             SkillDef.activationState = new SerializableEntityStateType(typeof(SpecialStart));
             SkillDef.activationStateMachineName = "Weapon";
@@ -558,6 +531,7 @@ namespace Bastian
             SkillDef.skillDescriptionToken = SURVIVORNAMEKEY + "_SPEC_DESCRIPTION";
             SkillDef.skillName = SURVIVORNAMEKEY + "_SPEC";
             SkillDef.skillNameToken = SURVIVORNAMEKEY + "_SPEC";
+            SkillDef.keywordTokens = new string[] { SURVIVORNAMEKEY + "_SPEC_KEYWORD", "KEYWORD_STUNNING" };
 
             ContentAddition.AddSkillDef(SkillDef);
 
@@ -575,7 +549,6 @@ namespace Bastian
                 viewableNode = new ViewablesCatalog.Node(SkillDef.skillNameToken, false, null)
             };
             ContentAddition.AddSkillFamily(skillFamily);
-
         }
     }
 }

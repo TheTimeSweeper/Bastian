@@ -9,7 +9,6 @@ using RoR2;
 using RoR2.Projectile;
 using RoR2.Skills;
 using UnityEngine;
-using UnityEngine.Networking;
 using KinematicCharacterController;
 using BepInEx.Configuration;
 using RoR2.UI;

@@ -80,6 +80,8 @@ namespace Bastian.Modules
                     section,
                     $"{bodyInfoTitle} Armor",
                     bodyComponent.baseArmor,
+                    -100,
+                    100,
                     "",
                     true).Value;
 
@@ -185,7 +187,6 @@ namespace Bastian.Modules
             return new ConfigEntry<T>(configEntry, defaultValue);
         }
 
-        //add risk of options dll to your project libs and uncomment this for a soft dependency
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         private static void TryRegisterOption<T>(BepInEx.Configuration.ConfigEntry<T> entry, float min, float max, bool restartRequired)
         {
