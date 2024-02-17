@@ -1,7 +1,7 @@
 {
 	"name": "Bastian",
 	"version_number": "2.0.0",
-	"website_url": "https://github.com/thunderstore-io",
+	"website_url": "https://github.com/TheTimeSweeper/Bastian/",
 	"description": "A Rogue Translator Bot, left to fight a battle he was never made to fight.",
 	"dependencies": [
 		"RiskofThunder-R2API_ContentManagement-1.0.0",
