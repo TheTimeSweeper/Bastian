@@ -49,7 +49,7 @@ namespace Bastian
             LanguageAPI.Add(SURVIVORNAMEKEY + "_UTIL_DESCRIPTION", $"Execute a rapid dash in any given direction, {Tokens.UtilityText("stunning")} enemies in your path.");
 
             LanguageAPI.Add(SURVIVORNAMEKEY + "_SPEC", "Architect Burst");
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_SPEC_DESCRIPTION", $"Expend <style=cIsHealth>{Configs.M4_Health_Cost.Value * 100}% current health</style> and <style=cIsUtility>all Ion Charges</style> for a massive burst of {Tokens.DamageText($"{Configs.M4_Min_Damage.Value * 100}-{Configs.M4_Max_Damage.Value * 100}% damage")}. After which, you are <color=#E9AFEA>Evasive</color>.");
+            LanguageAPI.Add(SURVIVORNAMEKEY + "_SPEC_DESCRIPTION", $"Expend <style=cIsHealth>{Configs.M4_Health_Cost.Value * 100}% current health</style> and <style=cIsUtility>all Ion Charges</style> for a massive burst of {Tokens.DamageText($"{Configs.M4_Min_Damage.Value * 100}-{Configs.M4_Max_Damage.Value * 100}% damage")}. After which, you are <color=#E9AFEA>Evasive</color> for 10 seconds.");
             LanguageAPI.Add(SURVIVORNAMEKEY + "_SPEC_KEYWORD", Tokens.KeywordText("Evasive", $"Reduce damage by {Tokens.HealthText("half")}, Gain {Tokens.UtilityText("80% movement speed")}, and {Tokens.UtilityText($"{Configs.M4_Regen.Value} regen")}."));
 
             LanguageAPI.Add("BASTIAN_ROO_DESCRIPTION", "Bastian, the Translator, Model 4.I.N.K.");

@@ -1,6 +1,8 @@
 # The Rogue Translator
 - Adds Bastian, a rogue translator bot, pulled from the standby crew of the UES to fight in the fields of Petrichor V.
 - Bastian is a high-stress survivor, meant for players who want to try a new style of combat. Not having been built for fighting, his new systems are somewhat unstable, leaving him vulnerable early on. He has to be careful when he first arrives on the planet, as one stray Golem beam, or one unaccounted-for pest, and it's system shutdown.
+- Fully Multiplayer Compatible
+- Highly Configurable, with Risk of Options support
 
 [![](https://cdn.discordapp.com/attachments/1043365621573894164/1203508044215091270/image.png?ex=65da93b5&is=65c81eb5&hm=6da48527e1b142a1fe32cb1275e67cb96357108372a44b868327b540b50e5e7a&)]()
 [![](https://cdn.discordapp.com/attachments/1043365621573894164/1203513561255776256/image.png?ex=65da98d9&is=65c823d9&hm=16374b39b6e0f76b6eaa6a3b891e10d1fd598d38217fc09ea08c148df2566aae&)]()
@@ -9,30 +11,20 @@
 # Current State
 
 - Currently looking for movement/power feedback, reach out at ItsKKing on discord with any feedback!
+- if anyone wants to do item displays, reach out
 
 ----
 # Moveset
 
 Bastian has a number of improvised moves at his disposal, each made with the parts found on the ship and his own internal workings.
 
-## Primary
-| Icon --------- | Name ----------- | Description ---------------------------------------------------------------------------------------- | Cooldown |
-|:--|--|----|--|
-|![](https://cdn.discordapp.com/attachments/1074050632979329057/1077652344646414346/m1_downscale.png) | **Shocking Swing** | Unleash a flurry of constant punches, doing 200% base damage. | none |
-
-## Secondary
-| Icon --------- | Name ----------- | Description ---------------------------------------------------------------------------------------- | Cooldown |
-|:--|--|----|--|
-|![](https://cdn.discordapp.com/attachments/1074050632979329057/1077652344872902796/m2_downscale.png) | **Micro-Bullet** | Fire 5 rounds of energy charges, each dealing 140% dmg. | 2 seconds/reload |
-## Utility
-| Icon --------- | Name ----------- | Description ---------------------------------------------------------------------------------------- | Cooldown |
-|:--|--|----|--|
-|![](https://cdn.discordapp.com/attachments/1074050632979329057/1077652345170710578/util_downscale.png) | **Nano-Spring** | Execute a rapid dash in any given direction, stunning enemies in your path. | 5 seconds |
-
-## Special
-| Icon --------- | Name ----------- | Description ---------------------------------------------------------------------------------------- | Cooldown |
-|:--|--|----|--|
-|![](https://cdn.discordapp.com/attachments/1074050632979329057/1077652345447522366/spec_downscale.png) | **Limit Menu** |Overload your body for a massive damage burst, at the cost of your movement speed and 1/3 health. | 55 seconds |
+| Icon | Name | Description | Cooldown |
+|:--|--|--------|--|
+|![](https://cdn.discordapp.com/attachments/1074050632979329057/1077652344646414346/m1_downscale.png) | **Ion Swing** | Deliver a punch for 250% damage. Builds up **Ion Charges**. | none |
+|![](https://cdn.discordapp.com/attachments/1074050632979329057/1077652344872902796/m2_downscale.png) | **Micro-Bullet** | Fire up to 5 rounds of **stunning** energy bullets, each dealing 250% dmg. | 8 seconds/reload |
+|![](https://cdn.discordapp.com/attachments/1074050632979329057/1077652345170710578/util_downscale.png) | **Nano-Spring** | Execute a rapid dash in any given direction, **stunning** enemies in your path. | 5 seconds |
+|![](https://cdn.discordapp.com/attachments/1074050632979329057/1077652345447522366/spec_downscale.png) | **Architect Burst** |Expend 33% of current health and all **Ion Charges** for a massive burst of 1000-6000% damage. after which you are **Evasive** for 10 seconds. | 12 seconds |
+| | **Evasive** | Reduce damage by half, gain 80% movement speed, and 10% regen | |
 
 # Credits
 
