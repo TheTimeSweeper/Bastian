@@ -15,7 +15,7 @@ namespace Bastian
                 + Environment.NewLine +
                 "<style=cSub>\r\n\r\n< ! > Micro-Bullet allows you to stay in the fray by stunning sources of impending danger."
                 + Environment.NewLine +
-                "<style=cSub>\r\n\r\n< ! > Nano-Spring allows you to find his way out of a packed crowd, stunning enemies to allow for a few seconds of relief."
+                "<style=cSub>\r\n\r\n< ! > Nano-Spring allows you to find your way out of a packed crowd, stunning enemies to allow for a few seconds of relief."
                 + Environment.NewLine +
                 "<style=cSub>\r\n\r\n< ! > FOR EMERGENCIES ONLY! All Bastian Models are equipped with a \"Self - Utilized Ion Charge/ Internal Detonation for Emergencies\", dubbed the \"Architect Burst\" which will detonate the model and anything in it's surrounding area. Survival is possible, but only if action is taken IMMEDIATELY after usage.";
 
@@ -50,7 +50,7 @@ namespace Bastian
 
             LanguageAPI.Add(SURVIVORNAMEKEY + "_SPEC", "Architect Burst");
             LanguageAPI.Add(SURVIVORNAMEKEY + "_SPEC_DESCRIPTION", $"Expend <style=cIsHealth>{Configs.M4_Health_Cost.Value * 100}% current health</style> and <style=cIsUtility>all Ion Charges</style> for a massive burst of {Tokens.DamageText($"{Configs.M4_Min_Damage.Value * 100}-{Configs.M4_Max_Damage.Value * 100}% damage")}. After which, you are <color=#E9AFEA>Evasive</color> for 10 seconds.");
-            LanguageAPI.Add(SURVIVORNAMEKEY + "_SPEC_KEYWORD", Tokens.KeywordText("Evasive", $"Reduce damage by {Tokens.HealthText("half")}, Gain {Tokens.UtilityText("80% movement speed")}, and {Tokens.UtilityText($"{Configs.M4_Regen.Value} regen")}."));
+            LanguageAPI.Add(SURVIVORNAMEKEY + "_SPEC_KEYWORD", Tokens.KeywordText("Evasive", $"Reduce damage by {Tokens.HealthText("half")}, Gain {Tokens.UtilityText("80% movement speed")}, and {Tokens.UtilityText($"{Configs.M4_Regen.Value * 100}% regen")}."));
 
             LanguageAPI.Add("BASTIAN_ROO_DESCRIPTION", "Bastian, the Translator, Model 4.I.N.K.");
         }

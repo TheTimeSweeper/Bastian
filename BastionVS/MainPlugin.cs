@@ -41,7 +41,7 @@ namespace Bastian
     {
         public const string MODUID = "com.TeamSillyGuy.Bastian";
         public const string MODNAME = "Bastian";
-        public const string VERSION = "2.0.0";
+        public const string VERSION = "2.1.0";
         public const string SURVIVORNAME = "Bastian";
         public const string SURVIVORNAMEKEY = "BASTIAN";
 

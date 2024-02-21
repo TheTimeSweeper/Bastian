@@ -29,17 +29,15 @@ namespace Bastian
         {
             ItemDisplays.LazyInit();
 
-            TheFunStuff();
-
-            //ItemDisplayCheck.PrintUnused(itemDisplayRuleSet);
+            List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules = new List<ItemDisplayRuleSet.KeyAssetRuleGroup>();
+            TheFunStuff(itemDisplayRules);
+            itemDisplayRuleSet.keyAssetRuleGroups = itemDisplayRules.ToArray();
 
             ItemDisplays.DisposeWhenDone();
         }
 
-        private void TheFunStuff()
+        private void TheFunStuff(List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules)
         {
-            List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules = new List<ItemDisplayRuleSet.KeyAssetRuleGroup>();
-
             itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(RoR2Content.Items.Syringe,
                 ItemDisplays.CreateDisplayRule(GetPrefab("RoR2/Base/Syringe/DisplaySyringeCluster.prefab"),
                     "Chest",
@@ -77,9 +75,9 @@ namespace Bastian
                 ));
 
             itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(RoR2Content.Items.CritGlasses,
-                ItemDisplays.CreateDisplayRule(GetPrefab("RoR2/Base/CritGlasses/DisplayGlasses.prefab"),
+                ItemDisplays.CreateDisplayRule(GetPrefab("RoR2/Base/CritGlasses/DisplayGlasses.prefab"), 
                     "head",
-                    new Vector3(0.00001F, 0.89782F, 0.53514F),
+                    new Vector3(0.00001F, 0.80001F, 0.53515F),
                     new Vector3(0F, 0F, 0F),
                     new Vector3(1.1096F, 1.1412F, 0.34684F)
                     )
@@ -88,25 +86,92 @@ namespace Bastian
             itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(DLC1Content.Items.CritGlassesVoid,
                 ItemDisplays.CreateDisplayRule(GetPrefab("RoR2/DLC1/CritGlassesVoid/DisplayGlassesVoid.prefab"),
                     "head",
-                    new Vector3(0.00001F, 0.89782F, 0.53514F),
+                    new Vector3(0.00001F, 0.80001F, 0.53515F),
                     new Vector3(0F, 0F, 0F),
                     new Vector3(1.1096F, 1.1412F, 0.34684F)
                     )
                 ));
 
-            #region the rest
-            /*
-            #region notdone
-            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["AlienHead"],
-                ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayAlienHead"),
-                    "Chest",
-                    new Vector3(2, 2, 2),
-                    new Vector3(0, 0, 0),
-                    new Vector3(1, 1, 1)
-                    )
-                ));
             itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["ArmorPlate"],
                 ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayRepulsionArmorPlate"),
+                     "upper_arm.R",
+                    new Vector3(-0.12647F, 0.55791F, 0.40499F),
+                    new Vector3(72.94631F, 159.2565F, 24.73481F),
+                    new Vector3(1F, 1F, 1F)
+                    )
+                ));
+            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["Bandolier"],
+                ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayBandolier"),
+                    "forearm.R",
+                    new Vector3(0.1324F, 1.21724F, -0.07957F),
+                    new Vector3(275.1351F, 38.49987F, 307.786F),
+                    new Vector3(0.9856F, 1.62022F, 1F)
+                    )
+                ));
+            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["BarrierOnKill"],
+                ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayBrooch"),
+                    "Chest",
+                    new Vector3(0.04605F, 1.33796F, 0.681F),
+                    new Vector3(64.60214F, 347.9129F, 350.4435F),
+                    new Vector3(1.35937F, 1.35937F, 1.35937F)
+                    )
+                ));
+            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["DeathProjectile"],
+                ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayDeathProjectile"),
+                    "thigh.L",
+                    new Vector3(-0.6605F, 0.4292F, -0.09372F),
+                    new Vector3(354.9184F, 273.6032F, 165.5404F),
+                    new Vector3(0.27578F, 0.27578F, 0.27578F)
+                    )
+                ));
+            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["Hoof"],
+                ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayHoof"),
+                    "shin.L",
+                    new Vector3(-0.02676F, 2.24497F, -0.23945F),
+                    new Vector3(77.77466F, 7.5278F, 339.761F),
+                    new Vector3(0.52266F, 0.52266F, 0.52266F)
+                    ),
+                ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.RightCalf)
+                ));
+            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["ElementalRingVoid"],
+                ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayVoidRing"),
+                    "fingerMuzzle",
+                    new Vector3(-0.04666F, -0.00305F, 0.30683F),
+                    new Vector3(0F, 0F, 0F),
+                    new Vector3(1.17103F, 1.17103F, 1.17103F)
+                    )
+                ));
+            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["EquipmentMagazineVoid"],
+                ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayFuelCellVoid"),
+                    "Chest",
+                    new Vector3(0.64284F, 0.63943F, 0.51768F),
+                    new Vector3(15.82875F, 4.45068F, 176.3986F),
+                    new Vector3(1F, 1F, 1F)
+                    )
+                ));
+            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["HalfAttackSpeedHalfCooldowns"],
+                ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayLunarShoulderNature"),
+                    "upper_arm.L",
+                    new Vector3(0.27066F, -0.19635F, 0.13623F),
+                    new Vector3(5.55456F, 6.70839F, 193.1937F),
+                    new Vector3(3.17448F, 3.17448F, 3.17448F)
+                    )
+                ));
+            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["Lightning"],
+                ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayLightningArmRight"),
+                    "UpperArmR",
+                    new Vector3(0F, 0F, 0F),
+                    new Vector3(0F, 0F, 0F),
+                    new Vector3(4.06211F, 4.06211F, 4.06211F)
+                    ),
+                ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.RightArm)
+                ));
+
+            return;
+            #region the rest
+
+            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["AlienHead"],
+                ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayAlienHead"),
                     "Chest",
                     new Vector3(2, 2, 2),
                     new Vector3(0, 0, 0),
@@ -139,22 +204,6 @@ namespace Bastian
                 ));
             itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["AutoCastEquipment"],
                 ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayFossil"),
-                    "Chest",
-                    new Vector3(2, 2, 2),
-                    new Vector3(0, 0, 0),
-                    new Vector3(1, 1, 1)
-                    )
-                ));
-            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["Bandolier"],
-                ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayBandolier"),
-                    "Chest",
-                    new Vector3(2, 2, 2),
-                    new Vector3(0, 0, 0),
-                    new Vector3(1, 1, 1)
-                    )
-                ));
-            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["BarrierOnKill"],
-                ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayBrooch"),
                     "Chest",
                     new Vector3(2, 2, 2),
                     new Vector3(0, 0, 0),
@@ -305,15 +354,7 @@ namespace Bastian
                     new Vector3(1, 1, 1)
                     )
                 ));
-            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["ElementalRingVoid"],
-                ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayVoidRing"),
-                    "Chest",
-                    new Vector3(2, 2, 2),
-                    new Vector3(0, 0, 0),
-                    new Vector3(1, 1, 1)
-                    )
-                ));
-            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["EmpowerAlways"],
+            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["LunarSun"],
                 ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.Head),
                 ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplaySunHeadNeck"),
                     "Chest",
@@ -338,14 +379,6 @@ namespace Bastian
                 ));
             itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["EquipmentMagazine"],
                 ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayBattery"),
-                    "Chest",
-                    new Vector3(2, 2, 2),
-                    new Vector3(0, 0, 0),
-                    new Vector3(1, 1, 1)
-                    )
-                ));
-            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["EquipmentMagazineVoid"],
-                ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayFuelCellVoid"),
                     "Chest",
                     new Vector3(2, 2, 2),
                     new Vector3(0, 0, 0),
@@ -494,14 +527,6 @@ namespace Bastian
                     new Vector3(1, 1, 1)
                     )
                 ));
-            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["HalfAttackSpeedHalfCooldowns"],
-                ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayLunarShoulderNature"),
-                    "Chest",
-                    new Vector3(2, 2, 2),
-                    new Vector3(0, 0, 0),
-                    new Vector3(1, 1, 1)
-                    )
-                ));
             itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["HalfSpeedDoubleHealth"],
                 ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayLunarShoulderStone"),
                     "Chest",
@@ -541,15 +566,6 @@ namespace Bastian
                     new Vector3(0, 0, 0),
                     new Vector3(1, 1, 1)
                     )
-                ));
-            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["Hoof"],
-                ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayHoof"),
-                    "Chest",
-                    new Vector3(2, 2, 2),
-                    new Vector3(0, 0, 0),
-                    new Vector3(1, 1, 1)
-                    ),
-                ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.RightCalf)
                 ));
             itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["IceRing"],
                 ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayIceRing"),
@@ -1235,14 +1251,6 @@ namespace Bastian
                     new Vector3(1, 1, 1)
                     )
                 ));
-            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["DeathProjectile"],
-                ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayDeathProjectile"),
-                    "Chest",
-                    new Vector3(2, 2, 2),
-                    new Vector3(0, 0, 0),
-                    new Vector3(1, 1, 1)
-                    )
-                ));
             itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["DroneBackup"],
                 ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayRadio"),
                     "Chest",
@@ -1399,15 +1407,6 @@ namespace Bastian
                     new Vector3(1, 1, 1)
                     )
                 ));
-            itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["Lightning"],
-                ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayLightningArmRight"),
-                    "Chest",
-                    new Vector3(2, 2, 2),
-                    new Vector3(0, 0, 0),
-                    new Vector3(1, 1, 1)
-                    ),
-                ItemDisplays.CreateLimbMaskDisplayRule(LimbFlags.RightArm)
-                ));
             itemDisplayRules.Add(ItemDisplays.CreateDisplayRuleGroupWithRules(ItemDisplays.KeyAssets["LunarPortalOnUse"],
                 ItemDisplays.CreateDisplayRule(ItemDisplays.LoadDisplay("DisplayLunarPortalOnUse"),
                     "Chest",
@@ -1496,11 +1495,7 @@ namespace Bastian
                     new Vector3(1, 1, 1)
                     )
                 ));
-            #endregion not done
-            */
             #endregion the rest
-
-            itemDisplayRuleSet.keyAssetRuleGroups = itemDisplayRules.ToArray();
         }
 
         private GameObject GetPrefab(string path)

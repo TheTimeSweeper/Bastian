@@ -4880,10 +4880,16 @@ MonoBehaviour:
     transform: {fileID: 7429922646945382146}
   - name: hand.L
     transform: {fileID: 5862289843028871063}
+  - name: UpperArmR
+    transform: {fileID: 5511636214196772185}
   - name: upper_arm.R
     transform: {fileID: 5511636214196772185}
+  - name: LowerArmR
+    transform: {fileID: 8768223501039322981}
   - name: forearm.R
     transform: {fileID: 8768223501039322981}
+  - name: HandR
+    transform: {fileID: 6670468684503732315}
   - name: hand.R
     transform: {fileID: 6670468684503732315}
 --- !u!1 &3115253125017551909
