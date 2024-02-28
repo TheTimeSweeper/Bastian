@@ -133,6 +133,7 @@ namespace Bastian
                 mat.SetTexture("_EmTex", em);
                 mat.SetFloat("_NormalStrength", 1f);
                 mat.SetTexture("_NormalTex", null);
+                mat.SetInt("_Cull", 0);
                 return mat;
             }
             return mat;
