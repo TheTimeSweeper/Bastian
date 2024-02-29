@@ -4,8 +4,8 @@
 - Fully Multiplayer Compatible
 - Highly Configurable, with Risk of Options support
 
-[![](https://cdn.discordapp.com/attachments/1043365621573894164/1203508044215091270/image.png?ex=65da93b5&is=65c81eb5&hm=6da48527e1b142a1fe32cb1275e67cb96357108372a44b868327b540b50e5e7a&)]()
-[![](https://cdn.discordapp.com/attachments/1043365621573894164/1203513561255776256/image.png?ex=65da98d9&is=65c823d9&hm=16374b39b6e0f76b6eaa6a3b891e10d1fd598d38217fc09ea08c148df2566aae&)]()
+[![](https://i.imgur.com/Kda1F4m.png)]()
+[![](https://i.imgur.com/9o4LMY2.png)]()
 
 ----
 # Current State
@@ -20,10 +20,10 @@ Bastian has a number of improvised moves at his disposal, each made with the par
 
 | Icon | Name | Description | Cooldown |
 |:--|--|--------|--|
-|![](https://cdn.discordapp.com/attachments/1074050632979329057/1077652344646414346/m1_downscale.png) | **Ion Swing** | Deliver a punch for 250% damage. Builds up **Ion Charges**. | none |
-|![](https://cdn.discordapp.com/attachments/1074050632979329057/1077652344872902796/m2_downscale.png) | **Micro-Bullet** | Fire up to 5 rounds of **stunning** energy bullets, each dealing 250% dmg. | 8 seconds/reload |
-|![](https://cdn.discordapp.com/attachments/1074050632979329057/1077652345170710578/util_downscale.png) | **Nano-Spring** | Execute a rapid dash in any given direction, **stunning** enemies in your path. | 5 seconds |
-|![](https://cdn.discordapp.com/attachments/1074050632979329057/1077652345447522366/spec_downscale.png) | **Architect Burst** |Expend 33% of current health and all **Ion Charges** for a massive burst of 1000-6000% damage. after which you are **Evasive** for 10 seconds. | 12 seconds |
+|![](https://i.imgur.com/y0Ck3GG.png) | **Ion Swing** | Deliver a punch for 250% damage. Builds up **Ion Charges**. | none |
+|![](https://i.imgur.com/ylOVMxi.png) | **Micro-Bullet** | Fire up to 5 rounds of **stunning** energy bullets, each dealing 250% dmg. | 8 seconds/reload |
+|![](https://i.imgur.com/4p0PWOE.png) | **Nano-Spring** | Execute a rapid dash in any given direction, **stunning** enemies in your path. | 5 seconds |
+|![](https://i.imgur.com/zMzmq0p.png) | **Architect Burst** |Expend 33% of current health and all **Ion Charges** for a massive burst of 1000-6000% damage. after which you are **Evasive** for 10 seconds. | 12 seconds |
 | | **Evasive** | Reduce damage by half, gain 80% movement speed, and 10% regen | |
 
 # Credits
@@ -38,7 +38,7 @@ Dotflare (Created the models for both the Main Skin and the Mastery skin. Anothe
 
 Dragonyck (Code/vfx/prefabs/projects, made the main part of the mod even possible.) https://thunderstore.io/package/Dragonyck/
 
-Domi (Animations. Made every animation I had in mind pop in ways I didn't even think possible.) https://twitter.com/spookydomi
+Domi (Animations. Made every animation I had in mind pop in ways I didn't even think possible. Came and and even overhauled some of them for the v2 release!) https://twitter.com/spookydomi
 
 Jhariah (Trailer Music. Still baffled that they gave me permission to use their song Risk!, but definitely go check them out!) https://twitter.com/JhariahClare
 
@@ -48,24 +48,28 @@ ProGamingNerd (Trailer Intro Animation. They managed to bang out the animated in
 
 SenseiJames (Trailer Footage Capture. A fantastic voice actor, and a fantastic cameraman for the footage in-game! Check out their teams mod, Paladin!) https://twitter.com/SenseiJamesX
 
+TimeSweeper (Jumped in and did some serious overhauls for this, fixing a number of issues and really just going above and beyond! Still can't believe it, you're fantastic dawg. Absolutely sexcellent stuff.)
+
+Discord: thetimesweeper
+
 
 
 -------
 # Concept Art Gallery
 
-[![](https://cdn.discordapp.com/attachments/1037472017328381993/1103434444204933140/image.png)]()
+[![](https://i.imgur.com/F2Qoa44.png)]()
 [Original Sketch - DragonRoilz]
 
-[![](https://cdn.discordapp.com/attachments/1037472017328381993/1105591354010128504/kkingturnaround.png)]()
+[![](https://i.imgur.com/EsFN5AH.png)]()
 [Helmet Design - DragonRoilz]
 
-[![](https://cdn.discordapp.com/attachments/1037472017328381993/1105582174964555838/kking.png)]()
+[![](https://i.imgur.com/NofvqXn.jpeg)]()
 [Final Main Skin Design - DragonRoilz]
 
-[![](https://cdn.discordapp.com/attachments/1175178569765376022/1175290097709633616/Bastian.png)]()
-[![](https://cdn.discordapp.com/attachments/1175178569765376022/1175357413755465738/BastianColor.png)]()
-[![](hhttps://cdn.discordapp.com/attachments/1175178569765376022/1176007873659150346/Bastian.png)]()
-[![](https://cdn.discordapp.com/attachments/1175178569765376022/1177457452455825469/BastianColor2.png)]()\
+[![](https://i.imgur.com/w0JaAZB.png)]()
+[![](https://i.imgur.com/VpVGBpG.png)]()
+[![](https://i.imgur.com/3bZQVEr.png)]()
+[![](https://i.imgur.com/HgcUPnH.png)]()
 [Mastery Skin Design Process - Ikachap]
 
 ----
@@ -73,6 +77,10 @@ SenseiJames (Trailer Footage Capture. A fantastic voice actor, and a fantastic c
 
 Nunchuk - Being so willing to help fix an issue with emote compat, and on such a sudden notice as well
 My friends Gwen and Phoebe - For listening to me ramble on about my ideas for the mod, and offering input as the development went on.
+
+Domi & TimeSweeper - You guys swooped in at the last second and managed to overhaul this into something wild. Idk how you two work so fast but good GOD you sre amazing.
+
+Zenithrium - They volunteered to come on and bang out the on-model item placements. Absolutely baller move from this mf.
 
 # To The Team
 This one is important to me. It's been an interesting process as this went on, and everyone has been so fun to work with on all this, it lead to some friendships I didn't even expect. You all did some amazing work here, and as the mod is finally going up, I hope everyone involved can look at this and feel proud of what they contributed. I couldn't have found a better group of people to work on this if I tried, and I appreciate everything you guys have done.
