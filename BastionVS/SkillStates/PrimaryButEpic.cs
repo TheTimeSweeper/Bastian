@@ -29,11 +29,12 @@ namespace Bastian
             hitHopVelocity = 4f;
             
             swingSoundString = "";
-            hitSoundString = "";
+            hitSoundString = "Play_Bastian_Punch_Impact";
             //muzzleString = swingIndex % 2 == 0 ? "SwingLeft" : "SwingRight";
             playbackRateParam = "M1";
             swingEffectPrefab = null;// Prefabs.swingEffect;
             hitEffectPrefab = Prefabs.swingImpact;
+            impactSound = RoR2.Audio.NetworkSoundEventIndex.Invalid;
             
             AkSoundEngine.PostEvent(Sounds.Play_Bastian_Swing, base.gameObject);
 

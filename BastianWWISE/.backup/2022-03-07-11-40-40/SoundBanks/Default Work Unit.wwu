@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{92493FCF-50D4-4F6C-86DB-949ABE1239FF}" SchemaVersion="89">
+	<SoundBanks>
+		<WorkUnit Name="Default Work Unit" ID="{92493FCF-50D4-4F6C-86DB-949ABE1239FF}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="fsadf" ID="{F1669752-7323-4384-AC85-ABD3F8A42220}">
+					<ObjectInclusionList/>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="blinkR" ID="{A6566CED-4D51-4645-B91B-E225CCB6C034}">
+					<ObjectInclusionList>
+						<ObjectRef Name="blinkR2" ID="{E191A9E3-35DC-4527-B74A-A3295004309B}" WorkUnitID="{980B796B-3BBD-42B2-827F-05A7D522ED95}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="blinkR3" ID="{6E48215D-2598-45E0-B9B6-BCD410FA655D}" WorkUnitID="{980B796B-3BBD-42B2-827F-05A7D522ED95}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="blinkR1" ID="{B9A93E1E-D647-4C38-9B04-815AFC07D9B0}" WorkUnitID="{980B796B-3BBD-42B2-827F-05A7D522ED95}" Filter="7" Origin="Manual"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="Bomber" ID="{F7C1C6A9-5D3B-4E5F-96A5-E55D34799C40}">
+					<ObjectInclusionList>
+						<ObjectRef Name="BomberM1" ID="{E63C1F35-80E0-455E-BF9B-DF4B617AB327}" WorkUnitID="{980B796B-3BBD-42B2-827F-05A7D522ED95}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="BomberSpecIn" ID="{58491D7D-51B2-4572-AB98-2EFDCDDF33E7}" WorkUnitID="{980B796B-3BBD-42B2-827F-05A7D522ED95}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="Enemy_Attach" ID="{D009146F-2043-46CA-936E-2A6341D1AEB9}" WorkUnitID="{980B796B-3BBD-42B2-827F-05A7D522ED95}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="BomberUtil" ID="{206C7EF2-BF90-47C5-9AAC-458010FC1866}" WorkUnitID="{980B796B-3BBD-42B2-827F-05A7D522ED95}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="BomberAttach" ID="{AC9444F8-8F1D-4940-8779-6B64D3CA6BED}" WorkUnitID="{980B796B-3BBD-42B2-827F-05A7D522ED95}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="BomberSpecOut" ID="{FD0C9074-5413-4966-90B1-1B693F64C2BD}" WorkUnitID="{980B796B-3BBD-42B2-827F-05A7D522ED95}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="BomberSpecIn2" ID="{873AA0F0-EBF9-49EB-B437-057C45D3AA66}" WorkUnitID="{980B796B-3BBD-42B2-827F-05A7D522ED95}" Filter="7" Origin="Manual"/>
+						<ObjectRef Name="BomberDetonate" ID="{AE0CA20F-FFAA-4DCA-901E-4C3909FE265F}" WorkUnitID="{980B796B-3BBD-42B2-827F-05A7D522ED95}" Filter="7" Origin="Manual"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>

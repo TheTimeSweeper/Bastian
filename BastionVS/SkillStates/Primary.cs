@@ -25,7 +25,7 @@ namespace Bastian
         private float duration = 0.5f;
 
         private float swingDelay = 0.12f;
-
+        
         private float maxSwingTime = 0.25f;
 
         private float minDuration = 0.38f;

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{980B796B-3BBD-42B2-827F-05A7D522ED95}" SchemaVersion="97">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{980B796B-3BBD-42B2-827F-05A7D522ED95}" PersistMode="Standalone">
+			<ChildrenList>
+				<Folder Name="Bastian" ID="{5F119E93-BA8C-4BA1-9FA5-6705A5363B8A}" ShortID="98104524">
+					<ChildrenList>
+						<Event Name="Play_Bastian_Fire" ID="{22001258-A05E-4A12-BBAD-4EC292C5B46C}">
+							<ChildrenList>
+								<Action Name="" ID="{0F07E69F-BADF-4F61-A011-6A79379B2109}" ShortID="350554097">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="fire" ID="{849BBD00-6D78-497E-A68F-1B8138D73750}" WorkUnitID="{5D13CE7B-281D-44A6-827E-B6EBBD1C27CE}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Bastian_Display" ID="{713F584F-11F2-46C5-8881-0DF0EE2CF55F}">
+							<ChildrenList>
+								<Action Name="" ID="{1F0C76C5-3E73-4267-8266-279DA19109E2}" ShortID="366830681">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="display" ID="{CA895C79-FB36-45D0-89EF-928E0DC60D31}" WorkUnitID="{5D13CE7B-281D-44A6-827E-B6EBBD1C27CE}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Bastian_Punch_Impact" ID="{40E06173-72DA-479E-9EC1-11BBB410807B}">
+							<ChildrenList>
+								<Action Name="" ID="{D96F9D95-C71C-4C39-8ED5-B38F15E896E9}" ShortID="731006023">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="punch_impact" ID="{08EC51AF-1904-403C-A67A-C3104C9CAC56}" WorkUnitID="{5D13CE7B-281D-44A6-827E-B6EBBD1C27CE}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Bastian_Swing" ID="{90101819-6959-4B7A-A386-D37CB209E88A}">
+							<ChildrenList>
+								<Action Name="" ID="{9CFCFD73-E17C-4A28-B28E-94D3B688FF86}" ShortID="950656930">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="swing" ID="{5C75E73B-9DC9-433A-8D8E-6EA933B8A0E8}" WorkUnitID="{5D13CE7B-281D-44A6-827E-B6EBBD1C27CE}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Bastian_Dash" ID="{C778C65A-5251-40DD-A8AD-38089699FE8F}">
+							<ChildrenList>
+								<Action Name="" ID="{9ECCE904-B326-4696-AE8B-A2AAC6545042}" ShortID="778293405">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="dash" ID="{CFD99D05-A7D7-47BD-86EA-A65B0A0EF829}" WorkUnitID="{5D13CE7B-281D-44A6-827E-B6EBBD1C27CE}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Bastian_Stun" ID="{9B8964CE-7F2A-42FD-9569-4CD9A8A9BF0D}">
+							<ChildrenList>
+								<Action Name="" ID="{E9D8398E-28AC-481B-A70E-7473E6A66C10}" ShortID="475955883">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Stun_Fixed" ID="{5738EF64-5B4B-4742-97F3-AA185E00C3B8}" WorkUnitID="{5D13CE7B-281D-44A6-827E-B6EBBD1C27CE}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Bastian_Bullet_Impact" ID="{95F53708-128E-4BA3-AF55-6CFB943A47F3}">
+							<ChildrenList>
+								<Action Name="" ID="{177FC901-7E12-40AF-8DBA-6B0B550BF708}" ShortID="42382742">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="bullet_impact" ID="{3B22BC9A-E781-4010-B95F-EC45F81D219A}" WorkUnitID="{5D13CE7B-281D-44A6-827E-B6EBBD1C27CE}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Bastian_FullBurst" ID="{D999392F-3A41-4B02-B372-A3D699955107}">
+							<ChildrenList>
+								<Action Name="" ID="{BE09638C-5073-4865-8A64-E369BEF70E1D}" ShortID="508066136">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="ULT Full" ID="{33AA978A-C851-4047-B6B6-AAAECBE92E9B}" WorkUnitID="{5D13CE7B-281D-44A6-827E-B6EBBD1C27CE}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Bastian_DashFast" ID="{98279651-B8CC-4B8A-ABA8-629EA4557926}">
+							<ChildrenList>
+								<Action Name="" ID="{100B3EF9-07C6-4CDD-B375-2B79A0033075}" ShortID="105408262">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="dashfast" ID="{423C2551-A61C-4616-8A3A-881874A2CC8E}" WorkUnitID="{5D13CE7B-281D-44A6-827E-B6EBBD1C27CE}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Bastian_Display_Swing" ID="{59543011-E05A-405A-A176-7F9C602BCABE}">
+							<ChildrenList>
+								<Action Name="" ID="{5484305B-38A8-44C0-907E-EEAB3136C9CC}" ShortID="28812072">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="1"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Swing 3" ID="{660E9560-86A8-4573-A6C8-23760ABDA603}" WorkUnitID="{5D13CE7B-281D-44A6-827E-B6EBBD1C27CE}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>
