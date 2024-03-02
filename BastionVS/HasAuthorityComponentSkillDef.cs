@@ -9,25 +9,22 @@ using UnityEngine;
 
 namespace Bastian.SkillDefs
 {
-    public class HasBlastDamageBuildupSkillDef : HasComponentSkillDef<BlastDamageBuildupController>
+    public class HasBlastDamageBuildupSkillDef : HasAuthorityComponentSkillDef<BlastDamageBuildupController> { }
+
+    public interface IHasAuthoritySkillDefComponent<T>
+    {
+        T componentFromSkillDef { get; set; }
+    }
+
+    public abstract class HasAuthorityComponentSkillDef<T> : SkillDef where T : MonoBehaviour
     {
         public override BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot)
         {
             return new InstanceData
             {
-                componentFromSkillDef = skillSlot.GetComponent<BlastDamageBuildupController>()
+                componentFromSkillDef = skillSlot.GetComponent<T>()
             };
         }
-    }
-
-    public interface IHasSkillDefComponent<T>
-    {
-        T componentFromSkillDef { get; set; }
-    }
-
-    public abstract class HasComponentSkillDef<T> : SkillDef where T : MonoBehaviour
-    {
-        public abstract override BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot);
 
         public class InstanceData : BaseSkillInstanceData 
         {
@@ -40,10 +37,10 @@ namespace Bastian.SkillDefs
 
             InstanceData instanceData = (InstanceData)skillSlot.skillInstanceData;
 
-            IHasSkillDefComponent<T> somethingComponentSkill;
-            if ((somethingComponentSkill = entityState as IHasSkillDefComponent<T>) != null)
+            IHasAuthoritySkillDefComponent<T> stateWithComponent;
+            if ((stateWithComponent = entityState as IHasAuthoritySkillDefComponent<T>) != null)
             {
-                somethingComponentSkill.componentFromSkillDef = instanceData.componentFromSkillDef;
+                stateWithComponent.componentFromSkillDef = instanceData.componentFromSkillDef;
 
             }
             return entityState;

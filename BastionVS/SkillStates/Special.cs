@@ -23,7 +23,7 @@ using Bastian.SkillDefs;
 
 namespace Bastian
 {
-    class SpecialStart : BaseSkillState, IHasSkillDefComponent<BlastDamageBuildupController>
+    class SpecialStart : BaseSkillState, IHasAuthoritySkillDefComponent<BlastDamageBuildupController>
     {
         private float duration = 1f;
         private CameraTargetParams.AimRequest aimRequest;
