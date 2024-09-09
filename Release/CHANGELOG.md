@@ -1,5 +1,13 @@
+`2.2.2`
+
+- SOTS Fix that was very easy and that pisses TimeSweeper off (Ty TimeSweeper)
+
 `2.2.0`
-- sots fix
+
+- Item+Equipment placement completed. (Tysm Zenith)
+
+- Sent Herobrine Eviction Notice due to Property Damage.
+
 
 `2.1.0`
 

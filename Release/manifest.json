@@ -1,6 +1,6 @@
 {
 	"name": "Bastian",
-	"version_number": "2.2.0",
+	"version_number": "2.2.2",
 	"website_url": "https://github.com/TheTimeSweeper/Bastian/",
 	"description": "A Rogue Translator Bot, left to fight a battle he was never made to fight.",
 	"dependencies": [
