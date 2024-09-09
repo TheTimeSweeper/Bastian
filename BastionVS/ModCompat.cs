@@ -35,7 +35,7 @@ namespace Bastian
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
         public static void InitEmoteSupport()
         {
-            EmotesAPI.CustomEmotesAPI.ImportArmature(MainPlugin.characterPrefab, Assets.MainAssetBundle.LoadAsset<GameObject>("BastianMeme"), true);
+            EmotesAPI.CustomEmotesAPI.ImportArmature(MainPlugin.characterPrefab, Asset.MainAssetBundle.LoadAsset<GameObject>("BastianMeme"), true);
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]

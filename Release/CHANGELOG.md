@@ -1,3 +1,6 @@
+`2.2.0`
+- sots fix
+
 `2.1.0`
 
 - updated punch impact sound effect. fixed weird splash sound effect playing as well.

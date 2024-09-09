@@ -57,19 +57,19 @@ Discord: thetimesweeper
 -------
 # Concept Art Gallery
 
-[![](https://i.imgur.com/F2Qoa44.png)]()
+![](https://i.imgur.com/F2Qoa44.png)
 [Original Sketch - DragonRoilz]
 
-[![](https://i.imgur.com/EsFN5AH.png)]()
+![](https://i.imgur.com/EsFN5AH.png)
 [Helmet Design - DragonRoilz]
 
-[![](https://i.imgur.com/NofvqXn.jpeg)]()
+![](https://i.imgur.com/NofvqXn.jpeg)
 [Final Main Skin Design - DragonRoilz]
 
-[![](https://i.imgur.com/w0JaAZB.png)]()
-[![](https://i.imgur.com/VpVGBpG.png)]()
-[![](https://i.imgur.com/3bZQVEr.png)]()
-[![](https://i.imgur.com/HgcUPnH.png)]()
+![](https://i.imgur.com/w0JaAZB.png)
+![](https://i.imgur.com/VpVGBpG.png)
+![](https://i.imgur.com/3bZQVEr.png)
+![](https://i.imgur.com/HgcUPnH.png)
 [Mastery Skin Design Process - Ikachap]
 
 ----

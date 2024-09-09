@@ -36,7 +36,7 @@ namespace Bastian
             {
                 r.material.shaderKeywords = null;
             }
-            characterDisplay.GetComponentInChildren<Animator>().runtimeAnimatorController = Assets.MainAssetBundle.LoadAsset<RuntimeAnimatorController>("displayAnimator");
+            characterDisplay.GetComponentInChildren<Animator>().runtimeAnimatorController = Asset.MainAssetBundle.LoadAsset<RuntimeAnimatorController>("displayAnimator");
             return characterDisplay;
         }
         internal static LoadoutAPI.SkinDefInfo CreateNewSkinDefInfo(SkinnedMeshRenderer[] renderers, string skinName, string objectToEnable, CharacterModel.RendererInfo[] rendererInfos, Sprite icon, UnlockableDef unlockableDef = null)

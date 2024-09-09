@@ -19,7 +19,7 @@ using R2API.ContentManagement;
 
 namespace Bastian
 {
-    class Assets
+    class Asset
     {
         public static AssetBundle MainAssetBundle = null; 
 

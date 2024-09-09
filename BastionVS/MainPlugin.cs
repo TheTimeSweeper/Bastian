@@ -54,7 +54,7 @@ namespace Bastian
         {
             instance = this;
             Configs.InitGeneral();
-            Assets.PopulateAssets();
+            Asset.PopulateAssets();
             Prefabs.CreatePrefabs();
             CreatePrefab();
             RegisterStates();
@@ -73,7 +73,7 @@ namespace Bastian
 
             if (ModCompat.ROOEnabled)
             {
-                ModCompat.InitROOSupport(Assets.MainAssetBundle.LoadAsset<Sprite>("portrait"));
+                ModCompat.InitROOSupport(Asset.MainAssetBundle.LoadAsset<Sprite>("portrait"));
             }
         }
         internal static void CreatePrefab()
@@ -86,7 +86,7 @@ namespace Bastian
             Destroy(characterPrefab.transform.Find("CameraPivot").gameObject);
             Destroy(characterPrefab.transform.Find("AimOrigin").gameObject);
 
-            GameObject model = Assets.MainAssetBundle.LoadAsset<GameObject>("Bastian");
+            GameObject model = Asset.MainAssetBundle.LoadAsset<GameObject>("Bastian");
             model.AddComponent<AnimationEvents>().soundCenter = model;
 
             GameObject ModelBase = new GameObject("ModelBase");
@@ -143,7 +143,7 @@ namespace Bastian
             bodyComponent.hideCrosshair = false;
             bodyComponent.aimOriginTransform = gameObject3.transform;
             bodyComponent.hullClassification = HullClassification.Human;
-            bodyComponent.portraitIcon = Assets.MainAssetBundle.LoadAsset<Sprite>("portrait").texture;
+            bodyComponent.portraitIcon = Asset.MainAssetBundle.LoadAsset<Sprite>("portrait").texture;
             bodyComponent.isChampion = false;
             bodyComponent.currentVehicle = null;
             bodyComponent.skinIndex = 0U;
@@ -195,7 +195,7 @@ namespace Bastian
             characterModel.baseRendererInfos = rendererInfos;
             characterModel.autoPopulateLightInfos = true;
             characterModel.invisibilityCount = 0;
-            characterModel.temporaryOverlays = new List<TemporaryOverlay>();
+            characterModel.temporaryOverlays = new List<TemporaryOverlayInstance>();
             characterModel.mainSkinnedMeshRenderer = model.GetComponentInChildren<SkinnedMeshRenderer>();
 
             ItemDisplayRuleSet itemDisplayRuleSet = ScriptableObject.CreateInstance<ItemDisplayRuleSet>();
@@ -224,7 +224,7 @@ namespace Bastian
             childLocator.FindChild("skin").gameObject.SetActive(false);
 
             var maskB = model.AddComponent<MaskBehaviour>();
-            maskB.maskOff = Utils.InstantiateMaterial(Assets.MainAssetBundle.LoadAsset<Material>("maskOff").mainTexture);
+            maskB.maskOff = Utils.InstantiateMaterial(Asset.MainAssetBundle.LoadAsset<Material>("maskOff").mainTexture);
             maskB.model = characterModel;
 
             Collider[] colliders = model.GetComponentsInChildren<Collider>();
@@ -403,7 +403,7 @@ namespace Bastian
             SkillDef.rechargeStock = 0;
             SkillDef.requiredStock = 0;
             SkillDef.stockToConsume = 0;
-            SkillDef.icon = Assets.MainAssetBundle.LoadAsset<Sprite>("primary");
+            SkillDef.icon = Asset.MainAssetBundle.LoadAsset<Sprite>("primary");
             SkillDef.skillDescriptionToken = SURVIVORNAMEKEY + "_M1_DESCRIPTION";
             SkillDef.skillName = SURVIVORNAMEKEY + "_M1";
             SkillDef.skillNameToken = SURVIVORNAMEKEY + "_M1";
@@ -443,7 +443,7 @@ namespace Bastian
             SkillDef.rechargeStock = 5;
             SkillDef.requiredStock = 1;
             SkillDef.stockToConsume = 1;
-            SkillDef.icon = Assets.MainAssetBundle.LoadAsset<Sprite>("secondary");
+            SkillDef.icon = Asset.MainAssetBundle.LoadAsset<Sprite>("secondary");
             SkillDef.skillDescriptionToken = SURVIVORNAMEKEY + "_M2_DESCRIPTION";
             SkillDef.skillName = SURVIVORNAMEKEY + "_M2";
             SkillDef.skillNameToken = SURVIVORNAMEKEY + "_M2";
@@ -486,7 +486,7 @@ namespace Bastian
             SkillDef.rechargeStock = 1;
             SkillDef.requiredStock = 1;
             SkillDef.stockToConsume = 1;
-            SkillDef.icon = Assets.MainAssetBundle.LoadAsset<Sprite>("utility");
+            SkillDef.icon = Asset.MainAssetBundle.LoadAsset<Sprite>("utility");
             SkillDef.skillDescriptionToken = SURVIVORNAMEKEY + "_UTIL_DESCRIPTION";
             SkillDef.skillName = SURVIVORNAMEKEY + "_UTIL";
             SkillDef.skillNameToken = SURVIVORNAMEKEY + "_UTIL";
@@ -527,7 +527,7 @@ namespace Bastian
             SkillDef.rechargeStock = 1;
             SkillDef.requiredStock = 1;
             SkillDef.stockToConsume = 1;
-            SkillDef.icon = Assets.MainAssetBundle.LoadAsset<Sprite>("special");
+            SkillDef.icon = Asset.MainAssetBundle.LoadAsset<Sprite>("special");
             SkillDef.skillDescriptionToken = SURVIVORNAMEKEY + "_SPEC_DESCRIPTION";
             SkillDef.skillName = SURVIVORNAMEKEY + "_SPEC";
             SkillDef.skillNameToken = SURVIVORNAMEKEY + "_SPEC";

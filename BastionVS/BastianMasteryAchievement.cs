@@ -3,7 +3,7 @@
 namespace Bastian
 {
     //automatically creates language tokens "ACHIEVMENT_{identifier.ToUpper()}_NAME" and "ACHIEVMENT_{identifier.ToUpper()}_DESCRIPTION" 
-    [RegisterAchievement(identifier, unlockableIdentifier, null, null)]
+    [RegisterAchievement(identifier, unlockableIdentifier, null, 10, null)]
     public class BastianMasteryAchievement : BaseMasteryAchievement
     {
         public const string identifier = MainPlugin.SURVIVORNAMEKEY + "masteryAchievement";
