@@ -1,3 +1,6 @@
+`2.2.3`
+- damagesource fix
+
 `2.2.2`
 
 - SOTS Fix that was very easy and that pisses TimeSweeper off (Ty TimeSweeper)
