@@ -12,7 +12,7 @@ namespace Bastian
         {
             hitboxGroupName = "Swing";
 
-            damageType = DamageType.Generic;
+            damageType = DamageTypeCombo.GenericPrimary;
             damageCoefficient = baseDamageCoefficient;
             procCoefficient = 1f;
             pushForce = 100f;

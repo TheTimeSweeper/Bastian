@@ -139,7 +139,7 @@ namespace Bastian
                 hasFired = true;
                 if (isAuthority)
                 {
-                    new BlastAttack
+                    BlastAttack blastAttack = new BlastAttack
                     {
                         attacker = base.gameObject,
                         baseDamage = this.damageStat * this.blastDamageCoefficient,
@@ -151,7 +151,9 @@ namespace Bastian
                         position = characterBody.corePosition,
                         attackerFiltering = AttackerFiltering.NeverHitSelf,
                         teamIndex = base.teamComponent.teamIndex,
-                    }.Fire();
+                    };
+                    blastAttack.damageType.damageSource = DamageSource.Special;
+                    blastAttack.Fire();
                 }
                 if (NetworkServer.active)
                 {

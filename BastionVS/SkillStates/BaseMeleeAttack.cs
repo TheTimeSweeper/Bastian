@@ -13,7 +13,7 @@ namespace Bastian
 
         protected string hitboxGroupName = "SwordGroup";
 
-        protected DamageType damageType = DamageType.Generic;
+        protected DamageTypeCombo damageType = DamageType.Generic;
         protected float damageCoefficient = 3.5f;
         protected float procCoefficient = 1f;
         protected float pushForce = 300f;

@@ -68,7 +68,7 @@ namespace Bastian
             Ray aimRay = base.GetAimRay();
             if (base.isAuthority)
             {
-                new BulletAttack
+                BulletAttack bulletAttack = new BulletAttack
                 {
                     owner = base.gameObject,
                     weapon = base.gameObject,
@@ -89,7 +89,9 @@ namespace Bastian
                     radius = 1f,
                     maxDistance = 100,
                     damageType = DamageType.Stun1s
-                }.Fire();
+                };
+                bulletAttack.damageType.damageSource = DamageSource.Secondary;
+                bulletAttack.Fire();
             }
         }
         public override void OnExit()
